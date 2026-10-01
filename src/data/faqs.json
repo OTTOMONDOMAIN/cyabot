@@ -1,0 +1,64 @@
+[
+  {
+    "kicker": "01",
+    "title": "About Cya",
+    "items": [
+      {
+        "q": "What is Cya?",
+        "a": "<p> Cya is a multi-purpose Discord bot for keeping servers safe, organized, and active. It brings antinuke protection, moderation, automod, logging, music, leveling, tickets, giveaways, utility tools, and more into one bot. </p>"
+      },
+      {
+        "q": "What can Cya do for my server?",
+        "a": "<p> You can use Cya for server protection, moderation, welcome and farewell messages, role tools, voice tools, music, XP and leaderboards, suggestions, tickets, social notifications, tracking, and automation. </p> <a class=\"faq-inline-link\" href=\"commands.html\">Browse all commands <span aria-hidden=\"true\">\u203a</span></a>"
+      },
+      {
+        "q": "Is Cya available for both slash and prefix commands?",
+        "a": "<p> Yes. The command service supports both Discord slash commands and prefix commands. The default prefix is <code>,</code>. </p>"
+      }
+    ]
+  },
+  {
+    "kicker": "02",
+    "title": "Setup and commands",
+    "items": [
+      {
+        "q": "How do I add Cya to my server?",
+        "a": "<p> Use an Invite button on this site, choose your server in Discord, and authorize the requested permissions. Once Cya joins, start with the setup commands for the modules you want to use. </p> <a class=\"faq-inline-link\" data-config-link=\"invite\" href=\"#\" target=\"_blank\" rel=\"noopener\">Invite Cya <span aria-hidden=\"true\">\u203a</span></a>"
+      },
+      {
+        "q": "Which modules can I configure?",
+        "a": "<p> Cya includes configurable modules for antinuke, automod, logging, greeting messages, leveling, music, giveaways, tickets, suggestions, self-roles, autoposting, social notifications, and more. </p>"
+      },
+      {
+        "q": "Where can I see every command and permission?",
+        "a": "<p> The live commands directory is generated from Cya\u2019s command service, so it shows current descriptions, arguments, categories, and required Discord permissions. </p> <a class=\"faq-inline-link\" href=\"commands.html\">Open the commands directory <span aria-hidden=\"true\">\u203a</span></a>"
+      },
+      {
+        "q": "Do I need to configure everything before using Cya?",
+        "a": "<p> No. Start with the modules your server needs and configure the rest later. Cya\u2019s command list shows which settings and permissions each module uses. </p>"
+      }
+    ]
+  },
+  {
+    "kicker": "03",
+    "title": "Safety and support",
+    "items": [
+      {
+        "q": "What permissions does Cya need?",
+        "a": "<p> Permissions depend on the features you use. Moderation, antinuke, tickets, music, and other modules need different Discord permissions. Review the invite screen and the permission details on each command before authorizing. </p>"
+      },
+      {
+        "q": "How does antinuke protection work?",
+        "a": "<p> The antinuke module monitors dangerous server actions and lets you manage protection settings, whitelist trusted users, and review the current module status. Configure it carefully for your staff structure. </p>"
+      },
+      {
+        "q": "Where can I get help?",
+        "a": "<p> Join the Cya support server for setup help, issue reports, and questions about the bot. </p> <a class=\"faq-inline-link\" data-config-link=\"support\" href=\"#\" target=\"_blank\" rel=\"noopener\">Open support <span aria-hidden=\"true\">\u203a</span></a>"
+      },
+      {
+        "q": "How can I check whether Cya is online?",
+        "a": "<p> Visit the live status page to see current availability, latency, server counts, and shard information. </p> <a class=\"faq-inline-link\" href=\"/status\">View live status <span aria-hidden=\"true\">\u203a</span></a>"
+      }
+    ]
+  }
+]

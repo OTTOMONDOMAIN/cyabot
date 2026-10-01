@@ -1,0 +1,7 @@
+{
+  "name": "Hedwig - Multi-purpose Discord Bot",
+  "description": "A multi-purpose discord bot capable of doing everything your server needs. Antinuke, moderation, music, leveling, ticketing, and comprehensive utility commands.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

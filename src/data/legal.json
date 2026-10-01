@@ -1,0 +1,181 @@
+{
+  "tos": {
+    "eyebrow": "Legal",
+    "title": "Terms of Service",
+    "meta": "Effective date: September 7, 2026",
+    "sections": [
+      {
+        "heading": "1. Acceptance of Terms",
+        "paragraphs": [
+          "By accessing or using Cya\u2019s services, including this website or adding the Cya bot to a Discord server, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service. If you do not agree, you must stop using the services."
+        ]
+      },
+      {
+        "heading": "2. Definitions",
+        "paragraphs": [
+          "\u201cCya,\u201d \u201cwe,\u201d \u201cus,\u201d and \u201cour\u201d refer to the Cya service and its operators. \u201cServices\u201d means the Cya bot, website, features, applications, and related services. \u201cUser,\u201d \u201cyou,\u201d and \u201cyour\u201d refer to any person or entity using the Services."
+        ]
+      },
+      {
+        "heading": "3. Compliance with Laws and Discord Policies",
+        "paragraphs": [
+          "You must comply with all applicable laws and regulations when using the Services. Your use of the Services is also subject to Discord\u2019s Terms of Service and Community Guidelines. A violation of those policies is a violation of these Terms."
+        ]
+      },
+      {
+        "heading": "4. Prohibited Website Activities",
+        "paragraphs": [
+          "You may not:"
+        ]
+      },
+      {
+        "heading": "5. Prohibited Bot Activities and Enforcement",
+        "paragraphs": [
+          "You may not use the Bot to violate Discord policies, reproduce or resell its functionality, exploit bugs or vulnerabilities, operate a server previously terminated for policy violations, or organize, participate in, or encourage harassment, raids, or targeted attacks.",
+          "We may suspend or terminate access, remove or restrict content, investigate suspected violations, report unlawful conduct, and pursue any remedies available under applicable law. Failure to enforce a provision is not a waiver of that provision."
+        ]
+      },
+      {
+        "heading": "6. Service Availability and Termination",
+        "paragraphs": [
+          "We do not guarantee continuous, uninterrupted, or secure access to the Services. We may refuse service, suspend access, or terminate use without prior notice when we believe conduct violates these Terms, applicable law, Discord policies, or the integrity of the Services.",
+          "Terms that by their nature should survive termination, including ownership, disclaimers, indemnification, and limitations of liability, will survive termination."
+        ]
+      },
+      {
+        "heading": "7. Third-Party Relationships",
+        "paragraphs": [
+          "Cya is not affiliated with, partnered with, or acting as an agent for Discord servers or communities that use the Services. We do not control the conduct, content, or information of third parties, and those parties are responsible for their own actions."
+        ]
+      },
+      {
+        "heading": "8. Indemnification",
+        "paragraphs": [
+          "You agree to defend and hold harmless Cya and its operators from claims, liabilities, damages, losses, costs, and expenses arising from your violation of these Terms or your misuse of the Services."
+        ]
+      },
+      {
+        "heading": "9. Limitation of Liability",
+        "paragraphs": [
+          "To the fullest extent permitted by law, Cya will not be liable for direct, indirect, incidental, special, consequential, punitive, or other losses resulting from your access to, use of, or inability to use the Services."
+        ]
+      },
+      {
+        "heading": "10. Changes to These Terms",
+        "paragraphs": [
+          "We may modify these Terms at our discretion. Continued use of the Services after changes are posted constitutes acceptance of the updated Terms."
+        ]
+      },
+      {
+        "heading": "11. Questions",
+        "paragraphs": [
+          "For questions about these Terms, please contact us through the <a data-config-link=\"support\" href=\"#\" target=\"_blank\" rel=\"noopener\">Cya Support Server</a>."
+        ]
+      }
+    ]
+  },
+  "privacy": {
+    "eyebrow": "Legal",
+    "title": "Privacy Policy",
+    "meta": "Effective date: September 7, 2026",
+    "sections": [
+      {
+        "heading": "1. Introduction",
+        "paragraphs": [
+          "This Privacy Policy explains how Cya collects, uses, stores, and protects information when you use the Cya bot, website, and related Services. By using the Services, you acknowledge that you have read and understood this Policy."
+        ]
+      },
+      {
+        "heading": "2. Information We Collect",
+        "paragraphs": [
+          "Depending on how you use the Services, we may process:"
+        ]
+      },
+      {
+        "heading": "3. How We Use Information",
+        "paragraphs": [
+          "We use information to provide and maintain bot functionality, respond to commands, support enabled server features, debug and secure the Services, prevent abuse, and understand aggregate usage needed for operations."
+        ]
+      },
+      {
+        "heading": "4. Retention",
+        "paragraphs": [
+          "We retain information only for as long as reasonably necessary for the purpose for which it was collected, to provide a requested feature, to maintain security, or to meet legal obligations. Temporary feature data may be automatically removed after the feature\u2019s retention period."
+        ]
+      },
+      {
+        "heading": "5. Sharing and Third Parties",
+        "paragraphs": [
+          "We do not sell or rent personal information. We may disclose information when required by law, to protect the Services and users, or to service providers that help us operate the Services. Your use of Discord is also governed by Discord\u2019s own policies and practices."
+        ]
+      },
+      {
+        "heading": "6. Your Choices and Requests",
+        "paragraphs": [
+          "You may request access to or deletion of information associated with your use of the Services through the <a data-config-link=\"support\" href=\"#\" target=\"_blank\" rel=\"noopener\">Cya Support Server</a>. Requests should identify the relevant Discord account or server and the information involved. We may need enough information to verify and safely process a request."
+        ]
+      },
+      {
+        "heading": "7. Security",
+        "paragraphs": [
+          "We use reasonable administrative and technical safeguards designed to protect information. No online service can guarantee absolute security, and you use the Services at your own risk."
+        ]
+      },
+      {
+        "heading": "8. Policy Changes",
+        "paragraphs": [
+          "We may update this Policy from time to time. Continued use of the Services after an updated Policy is posted constitutes acceptance of the revised Policy."
+        ]
+      },
+      {
+        "heading": "9. Questions",
+        "paragraphs": [
+          "For privacy questions or requests, contact us through the <a data-config-link=\"support\" href=\"#\" target=\"_blank\" rel=\"noopener\">Cya Support Server</a>."
+        ]
+      }
+    ]
+  },
+  "refund": {
+    "eyebrow": "Cya Premium",
+    "title": "Refund policy",
+    "meta": "Last updated: September 15, 2026",
+    "sections": [
+      {
+        "heading": "1. Eligibility",
+        "paragraphs": [
+          "Refund requests are only available for eligible payments above $3.00 when the request is made within 6 hours of purchase. Eligibility is assessed from the payment time and the time we receive your request."
+        ]
+      },
+      {
+        "heading": "2. PayPal payments",
+        "paragraphs": [
+          "Payments made through PayPal are non-refundable in all cases. Please review the selected Premium tier and payment method carefully before completing a PayPal purchase."
+        ]
+      },
+      {
+        "heading": "3. Review and exceptions",
+        "paragraphs": [
+          "Meeting the timing and amount requirements does not guarantee a refund. We may deny a request based on the circumstances, including suspected abuse, repeated refund requests, fraud, chargebacks, misuse of Premium, or other circumstances that make a refund inappropriate."
+        ]
+      },
+      {
+        "heading": "4. How to request a refund",
+        "paragraphs": [
+          "Contact us through the <a data-config-link=\"support\" href=\"#\" target=\"_blank\" rel=\"noopener\">Cya Support Server</a> as soon as possible. Include the Discord account or server connected to the purchase, the plan purchased, payment method, and transaction details. Do not post sensitive payment information publicly."
+        ]
+      },
+      {
+        "heading": "5. Processing",
+        "paragraphs": [
+          "We may ask for reasonable information to verify a purchase and prevent abuse. If approved, refunds are issued through the original payment method where possible. Premium access may be removed when a refund is approved."
+        ]
+      },
+      {
+        "heading": "6. Questions",
+        "paragraphs": [
+          "For questions about this policy, contact us through the <a data-config-link=\"support\" href=\"#\" target=\"_blank\" rel=\"noopener\">Cya Support Server</a>."
+        ]
+      }
+    ]
+  }
+}
