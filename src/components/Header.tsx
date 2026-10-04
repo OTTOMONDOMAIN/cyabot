@@ -54,11 +54,11 @@ export const Header: React.FC<HeaderProps> = ({ currentPath, onNavigate }) => {
             Commands
           </a>
           <a
-            href="/premium"
-            onClick={(e) => handleLinkClick(e, '/premium')}
-            className={isActive('/premium') ? 'active' : ''}
+            href="/billing"
+            onClick={(e) => handleLinkClick(e, '/billing')}
+            className={isActive('/billing') || isActive('/premium') ? 'active' : ''}
           >
-            Premium
+            Billing
           </a>
           <a
             href="https://docs.hedwig.site"
@@ -137,11 +137,11 @@ export const Header: React.FC<HeaderProps> = ({ currentPath, onNavigate }) => {
           Commands
         </a>
         <a
-          href="/premium"
-          onClick={(e) => handleLinkClick(e, '/premium')}
-          style={isActive('/premium') ? { color: '#22d3ee' } : undefined}
+          href="/billing"
+          onClick={(e) => handleLinkClick(e, '/billing')}
+          style={isActive('/billing') || isActive('/premium') ? { color: '#22d3ee' } : undefined}
         >
-          Premium
+          Billing
         </a>
         <a
           href="https://docs.hedwig.site"

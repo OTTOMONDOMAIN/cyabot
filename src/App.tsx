@@ -7,32 +7,45 @@ import React, { useState, useEffect } from 'react';
 import { Header } from './components/Header';
 import { HomePage } from './pages/HomePage';
 import { CommandsPage } from './pages/CommandsPage';
-import { PremiumPage } from './pages/PremiumPage';
+import { BillingPage } from './pages/BillingPage';
+import { AdminPage } from './pages/AdminPage';
 import { StatusPage } from './pages/StatusPage';
 import { FaqPage } from './pages/FaqPage';
 import { LegalPage } from './pages/LegalPage';
 
 export default function App() {
-  const [currentPath, setCurrentPath] = useState<string>(() => {
+  const getInitialRoute = () => {
     if (typeof window !== 'undefined') {
+      const hash = window.location.hash.replace(/^#\/?/, '').toLowerCase();
+      if (hash === 'admin') return '/admin';
       const p = window.location.pathname.toLowerCase();
       return p === '' ? '/' : p;
     }
     return '/';
-  });
+  };
+
+  const [currentPath, setCurrentPath] = useState<string>(getInitialRoute);
 
   useEffect(() => {
-    const handlePopState = () => {
+    const handleLocationChange = () => {
+      const hash = window.location.hash.replace(/^#\/?/, '').toLowerCase();
+      if (hash === 'admin') {
+        setCurrentPath('/admin');
+        return;
+      }
       const p = window.location.pathname.toLowerCase();
       setCurrentPath(p === '' ? '/' : p);
     };
 
-    window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
+    window.addEventListener('popstate', handleLocationChange);
+    window.addEventListener('hashchange', handleLocationChange);
+    return () => {
+      window.removeEventListener('popstate', handleLocationChange);
+      window.removeEventListener('hashchange', handleLocationChange);
+    };
   }, []);
 
   const navigate = (path: string) => {
-    // If it's a hash on the current page, scroll to element
     if (path.startsWith('#')) {
       const elem = document.querySelector(path);
       if (elem) {
@@ -57,8 +70,13 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const normalized = currentPath.replace(/\/+$/, '') || '/';
+  const isAdminRoute = normalized === '/admin' || normalized === '/admin.html';
+
   const renderContent = () => {
-    const normalized = currentPath.replace(/\/+$/, '') || '/';
+    if (isAdminRoute) {
+      return <AdminPage onNavigate={navigate} />;
+    }
 
     if (normalized === '/' || normalized === '/index.html' || normalized === '') {
       return <HomePage onNavigate={navigate} />;
@@ -68,8 +86,13 @@ export default function App() {
       return <CommandsPage onNavigate={navigate} />;
     }
 
-    if (normalized === '/premium') {
-      return <PremiumPage onNavigate={navigate} />;
+    if (
+      normalized === '/billing' ||
+      normalized === '/billing.html' ||
+      normalized === '/premium' ||
+      normalized === '/premium.html'
+    ) {
+      return <BillingPage onNavigate={navigate} />;
     }
 
     if (normalized === '/status') {
@@ -92,13 +115,12 @@ export default function App() {
       return <LegalPage type="refund" onNavigate={navigate} />;
     }
 
-    // Default fallback to home
     return <HomePage onNavigate={navigate} />;
   };
 
   return (
-    <div className="hedwig-app" style={{ minHeight: '100vh', backgroundColor: '#090a0c', color: '#f0f1f4' }}>
-      <Header currentPath={currentPath} onNavigate={navigate} />
+    <div className="hedwig-app" style={{ minHeight: '100vh', backgroundColor: '#05070a', color: '#f0f1f4' }}>
+      {!isAdminRoute && <Header currentPath={currentPath} onNavigate={navigate} />}
       {renderContent()}
     </div>
   );

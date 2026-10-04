@@ -1,0 +1,20 @@
+{
+  "EasyPaisa": {
+    "qrCodeUrl": "",
+    "accountTitle": "Cya Bot Official",
+    "accountNumber": "03XX-XXXXXXX",
+    "instructions": "Scan the EasyPaisa QR code using your EasyPaisa app, enter your EasyPaisa number below, and click Done after sending the payment."
+  },
+  "JazzCash": {
+    "qrCodeUrl": "",
+    "accountTitle": "Cya Bot Official",
+    "accountNumber": "03XX-XXXXXXX",
+    "instructions": "Scan the JazzCash QR code using your JazzCash app, enter your JazzCash mobile number below, and click Done after sending the payment."
+  },
+  "Crypto": {
+    "qrCodeUrl": "",
+    "accountTitle": "Binance Pay / USDT (TRC20)",
+    "accountNumber": "TXYZ...USDT_WALLET_OR_BINANCE_ID",
+    "instructions": "Scan the Binance Pay / USDT QR code, enter your Sender UID or Wallet / Contact below, and click Done after sending."
+  }
+}

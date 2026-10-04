@@ -1,0 +1,26 @@
+[
+  {
+    "id": "TXN-849201",
+    "planName": "Premium Plan",
+    "amount": "150 Rs",
+    "billingCycle": "monthly",
+    "paymentMethod": "EasyPaisa",
+    "phoneNumber": "0312-4982301",
+    "discordTag": "darky_user#0001",
+    "trxId": "EP-992837412",
+    "status": "pending",
+    "createdAt": "2026-10-04T13:30:00.000Z"
+  },
+  {
+    "id": "TXN-738194",
+    "planName": "Starter Plan",
+    "amount": "90 Rs",
+    "billingCycle": "monthly",
+    "paymentMethod": "EasyPaisa",
+    "phoneNumber": "0345-8821940",
+    "discordTag": "cyafan_99",
+    "trxId": "EP-883712045",
+    "status": "verified",
+    "createdAt": "2026-10-04T10:15:00.000Z"
+  }
+]
