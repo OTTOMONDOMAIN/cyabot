@@ -1,35 +1,53 @@
 import React from 'react';
 import { useStatus } from '../hooks/useData';
 import { Footer } from '../components/Footer';
+import { ActivityMonitor } from '../components/ActivityMonitor';
 
 interface StatusPageProps {
   onNavigate: (path: string) => void;
 }
 
 export const StatusPage: React.FC<StatusPageProps> = ({ onNavigate }) => {
-  const { status, loading, error, refresh } = useStatus(15000);
+  const { status, loading, error, refresh } = useStatus(5000);
 
   const formatNumber = (num: number) => new Intl.NumberFormat('en-US').format(num || 0);
 
   const formatUptime = (ms?: number) => {
-    const seconds = (Number(ms) || 0) / 1000;
-    if (seconds <= 0) return '99.98%';
+    const seconds = Math.floor((Number(ms) || 0) / 1000);
+    if (seconds <= 0) return '0s';
     const days = Math.floor(seconds / 86400);
     const hours = Math.floor((seconds % 86400) / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
-    if (days) return `${days}d ${hours}h`;
-    if (hours) return `${hours}h ${minutes}m`;
-    return `${minutes}m`;
+    const secs = seconds % 60;
+    if (days > 0) return `${days}d ${hours}h ${minutes}m`;
+    if (hours > 0) return `${hours}h ${minutes}m`;
+    if (minutes > 0) return `${minutes}m ${secs}s`;
+    return `${secs}s`;
   };
 
   const isOnline = status?.status === 'online' || status?.status === 'ready' || !status?.status;
+  const shards = status?.shardList && status.shardList.length > 0
+    ? status.shardList
+    : Array.from({ length: status?.shards ?? 1 }).map((_, idx) => ({
+        id: idx,
+        servers: status?.servers ?? 0,
+        users: status?.users ?? 0,
+        latency: status?.latency ?? 14,
+        status: 'ready',
+        uptime: status?.uptime || 3600000,
+      }));
 
   return (
     <div style={{ paddingTop: '80px', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <main className="status-main" style={{ flex: 1 }}>
         <div className="status-shell">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
-            <h1 style={{ margin: 0 }}>Cya Status</h1>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', flexWrap: 'wrap', gap: '12px' }}>
+            <div>
+              <h1 style={{ margin: 0 }}>Cya Live Status &amp; Telemetry</h1>
+              <p style={{ margin: '4px 0 0', fontSize: '13px', color: '#94a3b8' }}>
+                Auto-refreshing every 5 seconds · Bot ID: <code>{status?.botId || '1552270485520384112'}</code>
+              </p>
+            </div>
             <button
               onClick={() => refresh()}
               disabled={loading}
@@ -40,9 +58,10 @@ export const StatusPage: React.FC<StatusPageProps> = ({ onNavigate }) => {
                 background: 'rgba(6, 182, 212, 0.12)',
                 border: '1px solid rgba(34, 211, 238, 0.3)',
                 color: '#22d3ee',
-                padding: '6px 14px',
+                padding: '7px 16px',
                 borderRadius: '999px',
                 fontSize: '13px',
+                fontWeight: 600,
                 cursor: loading ? 'not-allowed' : 'pointer',
                 opacity: loading ? 0.6 : 1,
               }}
@@ -50,7 +69,7 @@ export const StatusPage: React.FC<StatusPageProps> = ({ onNavigate }) => {
               <span style={{ display: 'inline-block', transform: loading ? 'rotate(180deg)' : 'none', transition: 'transform 0.5s' }}>
                 ↻
               </span>
-              <span>{loading ? 'Checking...' : 'Refresh'}</span>
+              <span>{loading ? 'Syncing...' : 'Refresh Now'}</span>
             </button>
           </div>
 
@@ -61,7 +80,7 @@ export const StatusPage: React.FC<StatusPageProps> = ({ onNavigate }) => {
             </svg>
 
             <div className="overview-content">
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
                 <span
                   id="overall-status"
                   className="status-chip success"
@@ -71,14 +90,17 @@ export const StatusPage: React.FC<StatusPageProps> = ({ onNavigate }) => {
                     border: '1px solid rgba(34, 211, 238, 0.4)',
                   }}
                 >
-                  {isOnline ? 'All online' : 'Degraded'}
+                  {isOnline ? '● All Systems Operational' : 'Degraded'}
                 </span>
-                <span style={{ fontSize: '14px', color: '#22d3ee' }}>
-                  {status?.latency || 14}ms WS latency
+                <span style={{ fontSize: '14px', color: '#22d3ee', fontWeight: 700 }}>
+                  {status?.latency || 14}ms Live WS Latency
+                </span>
+                <span style={{ fontSize: '13px', color: '#94a3b8' }}>
+                  • Bot Tag: <strong style={{ color: '#fff' }}>{status?.botTag || 'cya#0001'}</strong>
                 </span>
               </div>
-              <p style={{ margin: '8px 0 0', color: '#71717a', fontSize: '14px' }}>
-                All systems, Discord gateway shards, and audio players for Cya are fully operational.
+              <p style={{ margin: '8px 0 0', color: '#94a3b8', fontSize: '14px' }}>
+                All Discord gateway shards, antinuke defense listeners, and audio streaming nodes for Cya are online and responding in real time.
               </p>
               {error && (
                 <p id="overall-error" style={{ color: '#f87171', fontSize: '13px', marginTop: '8px' }}>
@@ -88,37 +110,42 @@ export const StatusPage: React.FC<StatusPageProps> = ({ onNavigate }) => {
             </div>
           </section>
 
-          {/* Stats Grid */}
-          <section id="stats-grid" className="stats-grid" aria-label="Status summary" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '14px', marginTop: '20px' }}>
-            <div className="stat-card" style={{ padding: '20px', borderRadius: '14px', background: '#111212', border: '1px solid rgba(34, 211, 238, 0.1)' }}>
-              <span style={{ fontSize: '12px', color: '#71717a', display: 'block', marginBottom: '6px' }}>Total Servers</span>
-              <strong style={{ fontSize: '24px', color: '#fff' }}>{formatNumber(status?.servers || 1178)}</strong>
+          {/* Real-Time Stats Grid */}
+          <section id="stats-grid" className="stats-grid" aria-label="Status summary" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(175px, 1fr))', gap: '14px', marginTop: '20px' }}>
+            <div className="stat-card" style={{ padding: '20px', borderRadius: '14px', background: '#0b0f17', border: '1px solid rgba(34, 211, 238, 0.14)' }}>
+              <span style={{ fontSize: '12px', color: '#94a3b8', display: 'block', marginBottom: '6px' }}>Total Servers</span>
+              <strong style={{ fontSize: '26px', color: '#fff' }}>{formatNumber(status?.servers ?? 0)}</strong>
             </div>
 
-            <div className="stat-card" style={{ padding: '20px', borderRadius: '14px', background: '#111212', border: '1px solid rgba(34, 211, 238, 0.1)' }}>
-              <span style={{ fontSize: '12px', color: '#71717a', display: 'block', marginBottom: '6px' }}>Total Users</span>
-              <strong style={{ fontSize: '24px', color: '#fff' }}>{formatNumber(status?.users || 244846)}</strong>
+            <div className="stat-card" style={{ padding: '20px', borderRadius: '14px', background: '#0b0f17', border: '1px solid rgba(34, 211, 238, 0.14)' }}>
+              <span style={{ fontSize: '12px', color: '#94a3b8', display: 'block', marginBottom: '6px' }}>Total Users</span>
+              <strong style={{ fontSize: '26px', color: '#fff' }}>{formatNumber(status?.users ?? 0)}</strong>
             </div>
 
-            <div className="stat-card" style={{ padding: '20px', borderRadius: '14px', background: '#111212', border: '1px solid rgba(34, 211, 238, 0.1)' }}>
-              <span style={{ fontSize: '12px', color: '#71717a', display: 'block', marginBottom: '6px' }}>Websocket Latency</span>
-              <strong style={{ fontSize: '24px', color: '#22d3ee' }}>{status?.latency || 14}ms</strong>
+            <div className="stat-card" style={{ padding: '20px', borderRadius: '14px', background: '#0b0f17', border: '1px solid rgba(34, 211, 238, 0.14)' }}>
+              <span style={{ fontSize: '12px', color: '#94a3b8', display: 'block', marginBottom: '6px' }}>Gateway Latency</span>
+              <strong style={{ fontSize: '26px', color: '#22d3ee' }}>{status?.latency ?? 14}ms</strong>
             </div>
 
-            <div className="stat-card" style={{ padding: '20px', borderRadius: '14px', background: '#111212', border: '1px solid rgba(34, 211, 238, 0.1)' }}>
-              <span style={{ fontSize: '12px', color: '#71717a', display: 'block', marginBottom: '6px' }}>Commands Count</span>
-              <strong style={{ fontSize: '24px', color: '#fff' }}>{status?.commands || 420}</strong>
+            <div className="stat-card" style={{ padding: '20px', borderRadius: '14px', background: '#0b0f17', border: '1px solid rgba(34, 211, 238, 0.14)' }}>
+              <span style={{ fontSize: '12px', color: '#94a3b8', display: 'block', marginBottom: '6px' }}>Active Commands</span>
+              <strong style={{ fontSize: '26px', color: '#fff' }}>{status?.commands ?? 45}</strong>
             </div>
 
-            <div className="stat-card" style={{ padding: '20px', borderRadius: '14px', background: '#111212', border: '1px solid rgba(34, 211, 238, 0.1)' }}>
-              <span style={{ fontSize: '12px', color: '#71717a', display: 'block', marginBottom: '6px' }}>Shards</span>
-              <strong style={{ fontSize: '24px', color: '#fff' }}>{status?.shards || 1}</strong>
+            <div className="stat-card" style={{ padding: '20px', borderRadius: '14px', background: '#0b0f17', border: '1px solid rgba(34, 211, 238, 0.14)' }}>
+              <span style={{ fontSize: '12px', color: '#94a3b8', display: 'block', marginBottom: '6px' }}>Active Shards</span>
+              <strong style={{ fontSize: '26px', color: '#fff' }}>{status?.shards ?? 1}</strong>
             </div>
 
-            <div className="stat-card" style={{ padding: '20px', borderRadius: '14px', background: '#111212', border: '1px solid rgba(34, 211, 238, 0.1)' }}>
-              <span style={{ fontSize: '12px', color: '#71717a', display: 'block', marginBottom: '6px' }}>Uptime</span>
-              <strong style={{ fontSize: '24px', color: '#fff' }}>{formatUptime(status?.uptime)}</strong>
+            <div className="stat-card" style={{ padding: '20px', borderRadius: '14px', background: '#0b0f17', border: '1px solid rgba(34, 211, 238, 0.14)' }}>
+              <span style={{ fontSize: '12px', color: '#94a3b8', display: 'block', marginBottom: '6px' }}>Continuous Uptime</span>
+              <strong style={{ fontSize: '26px', color: '#34d399' }}>{formatUptime(status?.uptime)}</strong>
             </div>
+          </section>
+
+          {/* Live Activity Monitor */}
+          <section style={{ marginTop: '28px' }}>
+            <ActivityMonitor status={status} onRefresh={refresh} />
           </section>
 
           {/* Shards Section */}
@@ -130,12 +157,12 @@ export const StatusPage: React.FC<StatusPageProps> = ({ onNavigate }) => {
             </div>
 
             <div id="shards-grid" className="shards-grid" aria-live="polite" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '14px' }}>
-              {Array.from({ length: status?.shards || 1 }).map((_, idx) => (
+              {shards.map((shard) => (
                 <div
-                  key={idx}
+                  key={shard.id}
                   style={{
-                    backgroundColor: '#111212',
-                    border: '1px solid rgba(34, 211, 238, 0.15)',
+                    backgroundColor: '#0b0f17',
+                    border: '1px solid rgba(34, 211, 238, 0.18)',
                     borderRadius: '16px',
                     padding: '20px',
                     display: 'flex',
@@ -146,39 +173,39 @@ export const StatusPage: React.FC<StatusPageProps> = ({ onNavigate }) => {
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                       <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#22d3ee', display: 'inline-block', boxShadow: '0 0 8px #22d3ee' }}></span>
-                      <strong style={{ color: '#fff', fontSize: '15px' }}>Shard #{idx}</strong>
+                      <strong style={{ color: '#fff', fontSize: '15px' }}>Shard #{shard.id}</strong>
                     </div>
                     <span
                       style={{
                         fontSize: '11px',
                         padding: '2px 8px',
                         borderRadius: '999px',
-                        backgroundColor: 'rgba(6, 182, 212, 0.15)',
-                        color: '#22d3ee',
-                        fontWeight: 600,
+                        backgroundColor: 'rgba(16, 185, 129, 0.15)',
+                        color: '#34d399',
+                        fontWeight: 700,
                       }}
                     >
-                      Ready
+                      {shard.status.toUpperCase()}
                     </span>
                   </div>
 
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px', paddingTop: '8px', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px', paddingTop: '8px', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
                     <div>
                       <div style={{ fontSize: '11px', color: '#71717a' }}>Servers</div>
-                      <div style={{ fontSize: '14px', fontWeight: 600, color: '#d4d4d8' }}>
-                        {formatNumber(status?.servers || 1178)}
+                      <div style={{ fontSize: '14px', fontWeight: 600, color: '#e2e8f0' }}>
+                        {formatNumber(shard.servers)}
                       </div>
                     </div>
                     <div>
                       <div style={{ fontSize: '11px', color: '#71717a' }}>Users</div>
-                      <div style={{ fontSize: '14px', fontWeight: 600, color: '#d4d4d8' }}>
-                        {formatNumber(status?.users || 244846)}
+                      <div style={{ fontSize: '14px', fontWeight: 600, color: '#e2e8f0' }}>
+                        {formatNumber(shard.users)}
                       </div>
                     </div>
                     <div>
                       <div style={{ fontSize: '11px', color: '#71717a' }}>Ping</div>
-                      <div style={{ fontSize: '14px', fontWeight: 600, color: '#22d3ee' }}>
-                        {status?.latency || 14}ms
+                      <div style={{ fontSize: '14px', fontWeight: 700, color: '#22d3ee' }}>
+                        {shard.latency}ms
                       </div>
                     </div>
                   </div>

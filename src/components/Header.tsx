@@ -61,18 +61,18 @@ export const Header: React.FC<HeaderProps> = ({ currentPath, onNavigate }) => {
             Billing
           </a>
           <a
-            href="https://docs.hedwig.site"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-          <a
             href="/status"
             onClick={(e) => handleLinkClick(e, '/status')}
             className={isActive('/status') ? 'active' : ''}
           >
             Status
+          </a>
+          <a
+            href={config.supportServerUrl || 'https://dsc.gg/cyaa'}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Support
           </a>
         </div>
         <div className="header-actions">
@@ -144,18 +144,18 @@ export const Header: React.FC<HeaderProps> = ({ currentPath, onNavigate }) => {
           Billing
         </a>
         <a
-          href="https://docs.hedwig.site"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Documentation
-        </a>
-        <a
           href="/status"
           onClick={(e) => handleLinkClick(e, '/status')}
           style={isActive('/status') ? { color: '#22d3ee' } : undefined}
         >
           Status
+        </a>
+        <a
+          href={config.supportServerUrl || 'https://dsc.gg/cyaa'}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Support
         </a>
         <a
           className="cya-btn-primary"

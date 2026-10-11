@@ -1,0 +1,41 @@
+# robots.txt for Cya Discord Bot (https://cya.lat)
+# Configured for Google Search, Bing, and Generative AI Search Engines (GEO)
+
+User-agent: *
+Allow: /
+Allow: /commands
+Allow: /billing
+Allow: /status
+Allow: /faq
+Allow: /tos
+Allow: /privacy
+Allow: /refund
+Disallow: /admin
+Disallow: /api/admin/
+
+# Explicit Allow for AI Overviews & Generative Search Engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+Sitemap: https://cya.lat/sitemap.xml

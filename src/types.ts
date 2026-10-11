@@ -13,6 +13,21 @@ export interface ShardInfo {
   uptime: number;
 }
 
+export interface LatencyPoint {
+  timestamp: string;
+  ms: number;
+}
+
+export interface ActivityEvent {
+  id: string;
+  type: 'command' | 'gateway' | 'security' | 'billing' | 'sync';
+  title: string;
+  detail: string;
+  latencyMs: number;
+  shard: number;
+  timestamp: string;
+}
+
 export interface StatusData {
   status: string;
   servers: number;
@@ -24,6 +39,12 @@ export interface StatusData {
   botTag?: string;
   botId?: string;
   uptime?: number;
+  updatedAt?: string;
+  memoryUsageMB?: number;
+  cpuPercent?: number;
+  commandsPerMin?: number;
+  latencyHistory?: LatencyPoint[];
+  activityFeed?: ActivityEvent[];
   topServers?: { name: string; icon?: string; members?: number }[];
   shardList?: ShardInfo[];
 }

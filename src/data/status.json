@@ -1,1 +1,13 @@
-{"status":"online","servers":1178,"users":244846,"commands":420,"shards":1,"latency":14,"avatar":"https://cdn.discordapp.com/avatars/1488838353955848223/b58dab86db99a05c99e0fd02db0e4552.webp?size=256","botTag":"hedwig#2189","botId":"1488838353955848223","uptime":3221634,"topServers":[{"id":"1050358181336981554","name":"⚡. RAINITE ORG™","memberCount":24068,"icon":"https://cdn.discordapp.com/icons/1050358181336981554/05af27074615c5d565b40c7e66b8bb28.webp?size=128"},{"id":"1452171874996981906","name":"Meowlix.gg","memberCount":14450,"icon":"https://cdn.discordapp.com/icons/1452171874996981906/a_4a83d0490de93881cc69bfb2606fb3ed.gif?size=128"},{"id":"1418892848312619170","name":"ETHEREAL","memberCount":9846,"icon":"https://cdn.discordapp.com/icons/1418892848312619170/a_003a02bf07cb2ee273506992b57a18c8.gif?size=128"},{"id":"1381733808834875443","name":"Gamers Heaven","memberCount":9832,"icon":"https://cdn.discordapp.com/icons/1381733808834875443/5fb02f999613822e5996f4b3aa8c9bac.webp?size=128"},{"id":"1538925867743445013","name":"𝐃𝐀𝐀𝐊𝐔 • 𝐇𝐀𝐕𝐄𝐋𝐈","memberCount":9627,"icon":"https://cdn.discordapp.com/icons/1538925867743445013/a_0923ed60e711848b4f9f7f244bdd47e9.gif?size=128"},{"id":"1474265556176601140","name":"Members Wave","memberCount":7712,"icon":"https://cdn.discordapp.com/icons/1474265556176601140/a_42416a9f9eb0f2067226892066fdc4ea.gif?size=128"},{"id":"1414217749038891102","name":"AeroX Development","memberCount":7411,"icon":"https://cdn.discordapp.com/icons/1414217749038891102/9bb012c7e1634a0a0a6e727cca2b7751.webp?size=128"},{"id":"1387731918262505522","name":"Bite Back ♡","memberCount":5555,"icon":"https://cdn.discordapp.com/icons/1387731918262505522/f2c76caade4de43461edf299a548b996.webp?size=128"},{"id":"894568812471549992","name":"/Wreckers","memberCount":4398,"icon":"https://cdn.discordapp.com/icons/894568812471549992/a_44b23a51f7cb1eb3db4896fc29334962.gif?size=128"},{"id":"1293601301199982657","name":"SKELETON || ZERO TOXICITY","memberCount":4319,"icon":"https://cdn.discordapp.com/icons/1293601301199982657/a_7afe02c2cd3e180bdb1c9f0facfd94c5.gif?size=128"}]}
+{
+  "status": "online",
+  "servers": 1,
+  "users": 1,
+  "commands": 45,
+  "shards": 1,
+  "latency": 14,
+  "avatar": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+  "botTag": "cya#0001",
+  "botId": "1552270485520384112",
+  "uptime": 3600000,
+  "topServers": []
+}

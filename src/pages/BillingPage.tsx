@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useConfig } from '../hooks/useData';
 import { Footer } from '../components/Footer';
+import { validatePaymentInput, downloadReceiptImage, ReceiptData } from '../utils/receiptGenerator';
 
 interface BillingPageProps {
   onNavigate: (path: string) => void;
@@ -66,7 +67,7 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
   // Step: 'idle' | 'checkout' | 'verifying'
   const [flowStep, setFlowStep] = useState<'idle' | 'checkout' | 'verifying'>('idle');
   const [submitting, setSubmitting] = useState(false);
-  const [submittedTx, setSubmittedTx] = useState<any | null>(null);
+  const [submittedTx, setSubmittedTx] = useState<ReceiptData | null>(null);
   const [finalSubmittedConfirmation, setFinalSubmittedConfirmation] = useState(false);
 
   const [paymentSettings, setPaymentSettings] = useState<AllPaymentSettings>(DEFAULT_SETTINGS);
@@ -102,13 +103,16 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
     return () => clearInterval(timer);
   }, [flowStep, submittedTx?.id]);
 
-  // Monthly: 90 Rs / month, 150 Rs / month
-  // Annually (15% off per year): 918 Rs / year (90 * 12 * 0.85), 1530 Rs / year (150 * 12 * 0.85)
-  const starterPrice = annual ? 918 : 90;
-  const premiumPrice = annual ? 1530 : 150;
+  // Monthly: 160 Rs / month, 310 Rs / month
+  // Annually (15% off per year): 1632 Rs / year, 3162 Rs / year
+  const starterPrice = annual ? 1632 : 160;
+  const premiumPrice = annual ? 3162 : 310;
   const periodUnit = annual ? '/ year' : '/ month';
 
   const currentMethodConfig = paymentSettings[paymentMethod] || DEFAULT_SETTINGS[paymentMethod];
+
+  // Live validation check for phone / wallet input
+  const phoneValidation = validatePaymentInput(paymentMethod, phoneNumber);
 
   const handleSelectPlan = (plan: SelectedPlan) => {
     setSelectedPlan(plan);
@@ -119,51 +123,58 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
     setFlowStep('checkout');
   };
 
-  // When user clicks "Done" -> Moves to "Verifying your payment" page and records transaction
+  // When user clicks "Done" -> Validates real number, moves to "Verifying your payment" page, and records transaction
   const handleClickDone = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!phoneNumber.trim()) {
-      setFormError(
-        paymentMethod === 'Crypto'
-          ? 'Please enter your Sender UID, Wallet, or Phone number so we can verify your payment.'
-          : `Please enter your ${paymentMethod} mobile number so we can verify your payment.`
-      );
+    const check = validatePaymentInput(paymentMethod, phoneNumber);
+    if (!check.valid) {
+      setFormError(check.error || 'Please enter a valid mobile number.');
       return;
     }
-    setFormError('');
-    setFlowStep('verifying');
 
-    if (selectedPlan && !submittedTx) {
-      try {
-        const res = await fetch('/api/transactions', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            planName: selectedPlan.title,
-            amount: selectedPlan.displayPrice,
-            billingCycle: annual ? 'per year' : 'per month',
-            paymentMethod,
-            phoneNumber: phoneNumber.trim(),
-            discordTag: discordTag.trim() || 'Not specified',
-            trxId: trxId.trim() || `${paymentMethod} QR`,
-          }),
-        });
-        if (res.ok) {
-          const data = await res.json();
-          setSubmittedTx(data.transaction);
-        }
-      } catch (err) {
-        console.error(err);
+    setPhoneNumber(check.formatted);
+    setFormError('');
+
+    if (!selectedPlan) return;
+    setSubmitting(true);
+
+    try {
+      const res = await fetch('/api/transactions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          planName: selectedPlan.title,
+          amount: selectedPlan.displayPrice,
+          billingCycle: annual ? 'per year' : 'per month',
+          paymentMethod,
+          phoneNumber: check.formatted,
+          discordTag: discordTag.trim() || 'Not specified',
+          trxId: trxId.trim() || `${paymentMethod} QR`,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setFormError(data.error || 'Invalid mobile number.');
+        setSubmitting(false);
+        return;
       }
+      setSubmittedTx(data.transaction);
+      setFlowStep('verifying');
+    } catch (err) {
+      console.error(err);
+      setFormError('Failed to submit transaction. Please try again.');
+    } finally {
+      setSubmitting(false);
     }
   };
 
-  // When user clicks "Submit" on the Verifying Payment page -> Confirms & ensures it is in /admin transaction panel
+  // When user clicks "Submit" on the Verifying Payment page -> Confirms submission & shows receipt download
   const handleFinalSubmitToAdmin = async () => {
     if (!selectedPlan) return;
     setSubmitting(true);
     try {
       if (!submittedTx) {
+        const check = validatePaymentInput(paymentMethod, phoneNumber);
         const res = await fetch('/api/transactions', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -172,7 +183,7 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
             amount: selectedPlan.displayPrice,
             billingCycle: annual ? 'per year' : 'per month',
             paymentMethod,
-            phoneNumber: phoneNumber.trim(),
+            phoneNumber: check.formatted,
             discordTag: discordTag.trim() || 'Not specified',
             trxId: trxId.trim() || `${paymentMethod} QR`,
           }),
@@ -188,6 +199,23 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
     } finally {
       setSubmitting(false);
     }
+  };
+
+  const handleDownloadReceipt = () => {
+    if (!selectedPlan) return;
+    const receiptPayload: ReceiptData = submittedTx || {
+      id: 'TXN-PENDING',
+      planName: selectedPlan.title,
+      amount: selectedPlan.displayPrice,
+      billingCycle: annual ? 'per year' : 'per month',
+      paymentMethod,
+      phoneNumber,
+      discordTag: discordTag || 'Not specified',
+      trxId: trxId || `${paymentMethod} QR`,
+      status: 'pending',
+      createdAt: new Date().toISOString(),
+    };
+    downloadReceiptImage(receiptPayload);
   };
 
   const renderMethodPlaceholderQr = () => {
@@ -272,40 +300,40 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
   const faqs = [
     {
       q: 'How much does it cost if I need more features?',
-      a: 'Our Starter plan is just 90 Rs/month (or 918 Rs/year with 15% off) and covers all essential cooldown reductions, vote-gate bypasses, and 24/7 music. For full guild coverage and maximum AI limits, the Premium plan is 150 Rs/month (or 1,530 Rs/year).',
+      a: 'Our Starter plan is just 160 Rs/month (or 1,632 Rs/year with 15% off) and unlocks all premium features, No Prefix mode, unlimited custom embeds, AI commands, and early access to new commands. If you also want a custom bot profile picture and custom banner for your server, the Premium plan is 310 Rs/month (or 3,162 Rs/year).',
     },
     {
       q: 'How does EasyPaisa, JazzCash, or Crypto QR verification work?',
-      a: 'Simply select the 90 Rs or 150 Rs plan, choose your preferred payment method (EasyPaisa, JazzCash, or Crypto), scan the dedicated QR code, enter your number, and click Done. Once submitted, your transaction appears directly in our Admin Transaction Panel for approval.',
+      a: 'Simply select the 160 Rs or 310 Rs plan, choose your preferred payment method (EasyPaisa, JazzCash, or Crypto), scan the dedicated QR code, enter your real registered mobile number, and click Done. You will receive a downloadable official receipt and your payment will be verified by our admin team.',
     },
     {
       q: 'What if my payment verification takes longer than expected?',
-      a: 'Most transactions are verified within a few hours. If your payment takes more than 2 days to verify, please create a support ticket on our official Discord server with your Transaction ID.',
+      a: 'Most transactions are verified within a few hours. Make sure to download your Payment Receipt PNG after paying — if verification takes more than 2 days, create a support ticket on our Discord server and attach your receipt.',
     },
     {
       q: 'How many servers are available in the free plan?',
-      a: 'You can invite Cya to unlimited Discord servers on the Free Basic plan with access to 420+ commands, standard antinuke protection, and voice tools.',
+      a: 'You can invite Cya to unlimited Discord servers on the Free Basic plan with access to standard commands, antinuke protection, and voice tools.',
     },
     {
-      q: 'Who is the 150 Rs Premium plan designed for?',
-      a: 'The 150 Rs Premium plan is built for active community owners and power users who want zero vote restrictions, halved global cooldowns, 45/hr AI queries, and priority support.',
+      q: 'What is the difference between Starter (160 Rs) and Premium (310 Rs)?',
+      a: 'The 160 Rs Starter plan gives you all core premium features including No Prefix mode, Unlimited Embeds, AI Commands, and Early View of new commands. The 310 Rs Premium plan includes everything in Starter plus a Custom Bot Profile Picture and Custom Banner exclusively for your server.',
     },
     {
-      q: 'Can I upgrade from the 90 Rs plan to the 150 Rs plan later?',
-      a: 'Yes! You can upgrade anytime by submitting the difference or selecting the 150 Rs Premium tier on your next billing cycle.',
+      q: 'Can I upgrade from the 160 Rs plan to the 310 Rs plan later?',
+      a: 'Yes! You can upgrade anytime by submitting the difference or selecting the 310 Rs Premium tier on your next billing cycle.',
     },
   ];
 
   const comparisonRows = [
-    { feature: 'Global Command Cooldowns', basic: '10s Default', starter: '5s (50% Faster)', premium: '1.5s Instant' },
-    { feature: 'AI Ask & Reason Queries / Hr', basic: '10', starter: '25', premium: 'Unlimited' },
-    { feature: 'Bypass Top.gg Vote Requirement', basic: false, starter: true, premium: true },
-    { feature: '24/7 Music & Audio Equalizer Filters', basic: false, starter: true, premium: true },
-    { feature: 'Full Guild-Wide Member Coverage', basic: false, starter: false, premium: true },
-    { feature: 'Autonomous Antinuke & Role Recovery', basic: true, starter: true, premium: true },
+    { feature: 'All Core Premium Features & Cooldowns', basic: false, starter: true, premium: true },
+    { feature: 'No Prefix Mode (Command Without Prefix)', basic: false, starter: true, premium: true },
+    { feature: 'Unlimited Custom Embeds', basic: 'Limited', starter: 'Unlimited', premium: 'Unlimited' },
+    { feature: 'AI Commands (/ai ask & /ai reason)', basic: false, starter: true, premium: true },
+    { feature: 'Early View & Access to New Commands', basic: false, starter: true, premium: true },
+    { feature: 'Custom Bot Profile Picture & Banner', basic: false, starter: false, premium: true },
   ];
 
-  // If user is on the dedicated "Verifying your payment" page
+  // If user is on the dedicated "Verifying your payment" & Receipt page
   if (flowStep === 'verifying' && selectedPlan) {
     return (
       <div className="wise-billing-page" style={{ paddingTop: '96px', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
@@ -319,7 +347,6 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
                 <div className="verifying-circle verified">✓</div>
               ) : (
                 <div className="verifying-circle">
-                  <span className="spinner-ring"></span>
                   <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
                   </svg>
@@ -331,8 +358,8 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
               {submittedTx?.status === 'verified'
                 ? 'Payment Verified & Active'
                 : finalSubmittedConfirmation
-                ? 'Sent to Admin Panel · Awaiting Review'
-                : 'Step 2 of 2 · Confirm Submission'}
+                ? 'Official Receipt Issued · Awaiting Admin Verification'
+                : 'Payment Recorded · Download Your Receipt'}
             </span>
 
             <h1>Verifying your payment</h1>
@@ -344,44 +371,69 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
               </span>
             </p>
 
-            {/* Summary Box */}
-            <div className="verifying-details-box">
-              <div className="detail-row">
-                <span>Selected Plan</span>
-                <strong>{selectedPlan.title} ({selectedPlan.displayPrice} {selectedPlan.periodLabel})</strong>
-              </div>
-              <div className="detail-row">
-                <span>Payment Method</span>
-                <strong style={{ color: '#22d3ee' }}>{paymentMethod}</strong>
-              </div>
-              <div className="detail-row">
-                <span>Sender {paymentMethod === 'Crypto' ? 'UID / Wallet' : 'Mobile Number'}</span>
-                <strong>{phoneNumber}</strong>
-              </div>
-              {discordTag && (
-                <div className="detail-row">
-                  <span>Discord Account / Server</span>
-                  <strong>{discordTag}</strong>
+            {/* Official Receipt Card */}
+            <div className="official-receipt-preview">
+              <div className="receipt-header-strip">
+                <div className="receipt-brand">
+                  <img
+                    src="https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024"
+                    alt="cya"
+                    referrerPolicy="no-referrer"
+                  />
+                  <div>
+                    <strong>CYA OFFICIAL RECEIPT</strong>
+                    <span>{submittedTx?.createdAt ? new Date(submittedTx.createdAt).toLocaleString() : new Date().toLocaleString()}</span>
+                  </div>
                 </div>
-              )}
-              {submittedTx && (
-                <div className="detail-row">
-                  <span>Reference ID</span>
-                  <code style={{ color: '#22d3ee', fontWeight: 700 }}>{submittedTx.id}</code>
-                </div>
-              )}
-              <div className="detail-row">
-                <span>Verification Status</span>
-                <span
-                  className={`tx-status-pill ${submittedTx?.status || 'pending'}`}
-                >
-                  {submittedTx?.status === 'verified'
-                    ? '✓ Verified by Admin'
-                    : submittedTx?.status === 'rejected'
-                    ? '✕ Declined'
-                    : '● Pending Admin Verification'}
-                </span>
+                <code className="receipt-id-tag">{submittedTx?.id || 'TXN-PENDING'}</code>
               </div>
+
+              <div className="verifying-details-box" style={{ marginBottom: '14px' }}>
+                <div className="detail-row">
+                  <span>Selected Plan</span>
+                  <strong>{selectedPlan.title} ({selectedPlan.displayPrice} {selectedPlan.periodLabel})</strong>
+                </div>
+                <div className="detail-row">
+                  <span>Payment Gateway</span>
+                  <strong style={{ color: '#22d3ee' }}>{paymentMethod}</strong>
+                </div>
+                <div className="detail-row">
+                  <span>Registered {paymentMethod === 'Crypto' ? 'UID / Wallet' : 'Mobile Number'}</span>
+                  <strong>{phoneNumber}</strong>
+                </div>
+                {discordTag && (
+                  <div className="detail-row">
+                    <span>Discord Account / Server</span>
+                    <strong>{discordTag}</strong>
+                  </div>
+                )}
+                <div className="detail-row">
+                  <span>Verification Status</span>
+                  <span
+                    className={`tx-status-pill ${submittedTx?.status || 'pending'}`}
+                  >
+                    {submittedTx?.status === 'verified'
+                      ? '✓ Verified by Admin'
+                      : submittedTx?.status === 'rejected'
+                      ? '✕ Declined'
+                      : '● Pending Admin Verification'}
+                  </span>
+                </div>
+              </div>
+
+              {/* Download Receipt Button */}
+              <button
+                type="button"
+                className="download-receipt-btn"
+                onClick={handleDownloadReceipt}
+              >
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="7 10 12 15 17 10" />
+                  <line x1="12" y1="15" x2="12" y2="3" />
+                </svg>
+                <span>Download Official Receipt (PNG)</span>
+              </button>
             </div>
 
             {!finalSubmittedConfirmation ? (
@@ -392,24 +444,16 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
                   disabled={submitting}
                   onClick={handleFinalSubmitToAdmin}
                 >
-                  {submitting ? 'Submitting to Admin...' : 'Submit Payment for Verification'}
-                </button>
-                <button
-                  type="button"
-                  className="wise-back-btn"
-                  onClick={() => setFlowStep('checkout')}
-                >
-                  ← Edit Payment Details
+                  {submitting ? 'Submitting to Admin...' : 'Submit Payment to Admin Panel'}
                 </button>
               </div>
             ) : (
               <div className="submitted-success-banner">
                 <div className="submitted-check">✓</div>
                 <div>
-                  <strong>Payment Submitted Successfully!</strong>
+                  <strong>Sent to Admin Transaction Panel!</strong>
                   <p>
-                    Your transaction (<code>{submittedTx?.id}</code>) has been sent to the Admin Transaction Panel.
-                    If verification takes more than 2 days, open a ticket on our Discord server.
+                    Your transaction (<code>{submittedTx?.id}</code>) is now queued for verification. Save your downloaded receipt above and open a Discord ticket if verification takes more than 2 days.
                   </p>
                 </div>
               </div>
@@ -417,7 +461,7 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
 
             <div className="verifying-footer-links">
               <a
-                href={config.supportServerUrl || 'https://dsc.gg/cya'}
+                href={config.supportServerUrl || 'https://dsc.gg/cyaa'}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="discord-ticket-btn"
@@ -427,6 +471,13 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
                 </svg>
                 <span>Create Ticket on Discord (If &gt; 2 Days)</span>
               </a>
+
+              <p style={{ margin: '4px 0 0', fontSize: '12.5px', color: '#94a3b8' }}>
+                Or email your receipt to{' '}
+                <a href="mailto:cyabot@zohomail.com" style={{ color: '#22d3ee', fontWeight: 600 }}>
+                  cyabot@zohomail.com
+                </a>
+              </p>
 
               <button
                 type="button"
@@ -571,23 +622,23 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
                   <ul className="wise-feature-list">
                     <li>
                       <span className="wise-check-icon">✓</span>
-                      <span>50% Faster Command Cooldowns</span>
+                      <span>All Premium Features Unlocked</span>
                     </li>
                     <li>
                       <span className="wise-check-icon">✓</span>
-                      <span>Skip All 20+ Top.gg Vote Gates</span>
+                      <span>No Prefix Mode</span>
                     </li>
                     <li>
                       <span className="wise-check-icon">✓</span>
-                      <span>24/7 Non-Stop Music Radio</span>
+                      <span>Unlimited Custom Embeds</span>
                     </li>
                     <li>
                       <span className="wise-check-icon">✓</span>
-                      <span>Unified Server Analytics</span>
+                      <span>Full AI Commands Access</span>
                     </li>
                     <li>
                       <span className="wise-check-icon">✓</span>
-                      <span>Dynamic VoiceMaster Access</span>
+                      <span>Early View of New Commands</span>
                     </li>
                   </ul>
 
@@ -596,10 +647,10 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
                     className="wise-plan-btn"
                     onClick={() =>
                       handleSelectPlan({
-                        id: 'starter-90',
+                        id: 'starter-160',
                         title: 'Starter Plan',
-                        priceMonthly: 90,
-                        priceAnnual: 918,
+                        priceMonthly: 160,
+                        priceAnnual: 1632,
                         displayPrice: `${starterPrice} Rs`,
                         periodLabel: annual ? 'per year' : 'per month',
                         subtitle: 'Ideal for growing communities',
@@ -651,27 +702,23 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
                   <ul className="wise-feature-list">
                     <li>
                       <span className="wise-check-icon">✓</span>
-                      <span>Unlimited Guild + User Coverage</span>
+                      <span>Everything in Starter Plan</span>
                     </li>
                     <li>
                       <span className="wise-check-icon">✓</span>
-                      <span>Unlimited /ai ask &amp; /ai reason</span>
+                      <span>Custom Bot Profile Picture</span>
                     </li>
                     <li>
                       <span className="wise-check-icon">✓</span>
-                      <span>Instant Antinuke Role Recovery</span>
+                      <span>Custom Bot Profile Banner</span>
                     </li>
                     <li>
                       <span className="wise-check-icon">✓</span>
-                      <span>All Audio Equalizer Filters (8D)</span>
+                      <span>No Prefix &amp; Unlimited Embeds</span>
                     </li>
                     <li>
                       <span className="wise-check-icon">✓</span>
-                      <span>Custom Ticket HTML Transcripts</span>
-                    </li>
-                    <li>
-                      <span className="wise-check-icon">✓</span>
-                      <span>Dedicated VIP Priority Support</span>
+                      <span>AI Commands &amp; Early Command View</span>
                     </li>
                   </ul>
 
@@ -680,10 +727,10 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
                     className="wise-plan-btn"
                     onClick={() =>
                       handleSelectPlan({
-                        id: 'premium-150',
+                        id: 'premium-310',
                         title: 'Premium Plan',
-                        priceMonthly: 150,
-                        priceAnnual: 1530,
+                        priceMonthly: 310,
+                        priceAnnual: 3162,
                         displayPrice: `${premiumPrice} Rs`,
                         periodLabel: annual ? 'per year' : 'per month',
                         subtitle: 'Works best for large & power servers',
@@ -839,10 +886,10 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
                   className="wise-plan-btn orbital-btn"
                   onClick={() =>
                     handleSelectPlan({
-                      id: 'premium-150',
+                      id: 'premium-310',
                       title: 'Premium Plan',
-                      priceMonthly: 150,
-                      priceAnnual: 1530,
+                      priceMonthly: 310,
+                      priceAnnual: 3162,
                       displayPrice: `${premiumPrice} Rs`,
                       periodLabel: annual ? 'per year' : 'per month',
                       subtitle: 'Works best for large & power servers',
@@ -894,7 +941,10 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
                 <button
                   type="button"
                   className={`method-tab-btn ${paymentMethod === 'EasyPaisa' ? 'active' : ''}`}
-                  onClick={() => setPaymentMethod('EasyPaisa')}
+                  onClick={() => {
+                    setPaymentMethod('EasyPaisa');
+                    setFormError('');
+                  }}
                 >
                   <strong>EasyPaisa</strong>
                   <small>EasyPaisa QR</small>
@@ -902,7 +952,10 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
                 <button
                   type="button"
                   className={`method-tab-btn ${paymentMethod === 'JazzCash' ? 'active' : ''}`}
-                  onClick={() => setPaymentMethod('JazzCash')}
+                  onClick={() => {
+                    setPaymentMethod('JazzCash');
+                    setFormError('');
+                  }}
                 >
                   <strong>JazzCash</strong>
                   <small>JazzCash QR</small>
@@ -910,7 +963,10 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
                 <button
                   type="button"
                   className={`method-tab-btn ${paymentMethod === 'Crypto' ? 'active' : ''}`}
-                  onClick={() => setPaymentMethod('Crypto')}
+                  onClick={() => {
+                    setPaymentMethod('Crypto');
+                    setFormError('');
+                  }}
                 >
                   <strong>Crypto (USDT)</strong>
                   <small>Binance QR</small>
@@ -978,26 +1034,53 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
               </div>
             </div>
 
-            {/* Form asking for user's number */}
+            {/* Form asking for user's real number */}
             <form onSubmit={handleClickDone} className="easypaisa-form">
               <div className="form-field">
-                <label htmlFor="ep-phone">
-                  {paymentMethod === 'EasyPaisa'
-                    ? 'Your EasyPaisa Mobile Number *'
-                    : paymentMethod === 'JazzCash'
-                    ? 'Your JazzCash Mobile Number *'
-                    : 'Your Sender Wallet / Binance UID or Phone *'}
-                </label>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <label htmlFor="ep-phone">
+                    {paymentMethod === 'EasyPaisa'
+                      ? 'Your Registered EasyPaisa Number *'
+                      : paymentMethod === 'JazzCash'
+                      ? 'Your Registered JazzCash Number *'
+                      : 'Your Sender Wallet / Binance UID or Phone *'}
+                  </label>
+                  {phoneNumber.trim().length > 0 && (
+                    <span
+                      style={{
+                        fontSize: '11px',
+                        fontWeight: 700,
+                        color: phoneValidation.valid ? '#34d399' : '#f87171',
+                      }}
+                    >
+                      {phoneValidation.valid
+                        ? `✓ ${phoneValidation.carrier} (${phoneValidation.formatted})`
+                        : '✕ Invalid Number Format'}
+                    </span>
+                  )}
+                </div>
                 <input
                   id="ep-phone"
-                  type="text"
+                  type="tel"
                   placeholder={
                     paymentMethod === 'Crypto'
-                      ? 'Enter your Binance UID, Wallet, or Phone'
-                      : '03XX-XXXXXXX'
+                      ? 'e.g. 849201928 or T... Wallet or 0312-3456789'
+                      : '0312-3456789 (11-digit valid PK number)'
                   }
                   value={phoneNumber}
-                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  onChange={(e) => {
+                    setPhoneNumber(e.target.value);
+                    if (formError) setFormError('');
+                  }}
+                  style={
+                    phoneNumber.trim().length > 0
+                      ? {
+                          borderColor: phoneValidation.valid
+                            ? 'rgba(52, 211, 153, 0.5)'
+                            : 'rgba(248, 113, 113, 0.5)',
+                        }
+                      : undefined
+                  }
                   required
                 />
               </div>
@@ -1027,8 +1110,12 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
 
               {formError && <p className="ep-error-msg">{formError}</p>}
 
-              <button type="submit" className="wise-plan-btn ep-done-btn">
-                Done — Proceed to Verification
+              <button
+                type="submit"
+                className="wise-plan-btn ep-done-btn"
+                disabled={submitting}
+              >
+                {submitting ? 'Verifying & Generating Receipt...' : 'Done — Generate Receipt & Verify'}
               </button>
             </form>
           </div>

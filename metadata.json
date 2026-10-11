@@ -1,6 +1,6 @@
 {
   "name": "Hedwig - Multi-purpose Discord Bot",
-  "description": "A multi-purpose discord bot capable of doing everything your server needs. Antinuke, moderation, music, leveling, ticketing, and comprehensive utility commands.",
+  "description": "Cya is an all-in-one Discord bot with sub-20ms antinuke defense, lossless 24/7 music, AutoMod, VoiceMaster, and 420+ slash commands. Add Cya free today.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

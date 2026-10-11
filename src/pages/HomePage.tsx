@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useConfig, useStatus, useCommands } from '../hooks/useData';
 import { Footer } from '../components/Footer';
+import { ActivityMonitor } from '../components/ActivityMonitor';
 
 interface HomePageProps {
   onNavigate: (path: string) => void;
@@ -8,7 +9,7 @@ interface HomePageProps {
 
 export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
   const config = useConfig();
-  const { status, loading: statusLoading } = useStatus();
+  const { status, refresh } = useStatus(5000);
   const { commands } = useCommands();
 
   const [activeTab, setActiveTab] = useState<'antinuke' | 'music' | 'automod' | 'voicemaster' | 'tickets'>('antinuke');
@@ -16,9 +17,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
 
   const formatNumber = (num: number) => new Intl.NumberFormat('en-US').format(num || 0);
 
-  const serverCount = status?.servers || 1178;
-  const userCount = status?.users || 244846;
-  const commandCount = commands?.length || status?.commands || 420;
+  const serverCount = status?.servers ?? 0;
+  const userCount = status?.users ?? 0;
+  const commandCount = status?.commands ?? commands?.length ?? 45;
 
   const copyCommandText = (cmd: string) => {
     navigator.clipboard.writeText(cmd);
@@ -168,6 +169,11 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 <strong>{commandCount}+</strong>
                 <span>Slash Commands</span>
               </div>
+              <div className="metric-divider"></div>
+              <div className="metric-item">
+                <strong style={{ color: '#22d3ee' }}>{status?.latency ?? 14}ms</strong>
+                <span>Live WS Ping</span>
+              </div>
             </div>
 
             <div className="cya-hero-actions">
@@ -199,98 +205,133 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
 
           {/* Interactive Live Command Terminal */}
           <div className="cya-hero-right">
-            <div className="cya-terminal-card">
-              <div className="terminal-header">
+            <div className="cya-terminal-window">
+              <div className="terminal-topbar">
                 <div className="terminal-dots">
-                  <span className="dot dot-red"></span>
-                  <span className="dot dot-yellow"></span>
-                  <span className="dot dot-green"></span>
+                  <span className="dot-red"></span>
+                  <span className="dot-yellow"></span>
+                  <span className="dot-green"></span>
                 </div>
-                <div className="terminal-title">Discord Command Simulator</div>
-                <div className="terminal-status">
-                  <span className="status-ping">14ms</span>
-                </div>
+                <span className="terminal-title">cya-core — discord-gateway</span>
+                <span className="terminal-status">● Connected</span>
               </div>
 
-              {/* Module Selector Tabs */}
+              {/* Interactive Module Tabs */}
               <div className="terminal-tabs" role="tablist">
-                {[
-                  { id: 'antinuke', label: '🛡️ Antinuke' },
-                  { id: 'music', label: '🎵 Music' },
-                  { id: 'automod', label: '⚡ AutoMod' },
-                  { id: 'voicemaster', label: '🎙️ VoiceMaster' },
-                  { id: 'tickets', label: '🎫 Tickets' },
-                ].map((tab) => (
+                {(['antinuke', 'music', 'automod', 'voicemaster', 'tickets'] as const).map((tabKey) => (
                   <button
-                    key={tab.id}
-                    type="button"
+                    key={tabKey}
                     role="tab"
-                    aria-selected={activeTab === tab.id}
-                    className={`terminal-tab ${activeTab === tab.id ? 'active' : ''}`}
-                    onClick={() => setActiveTab(tab.id as any)}
+                    aria-selected={activeTab === tabKey}
+                    className={`terminal-tab ${activeTab === tabKey ? 'active' : ''}`}
+                    onClick={() => setActiveTab(tabKey)}
                   >
-                    {tab.label}
+                    {tabKey === 'antinuke' && '🛡️ Antinuke'}
+                    {tabKey === 'music' && '🎵 Music'}
+                    {tabKey === 'automod' && '⚡ AutoMod'}
+                    {tabKey === 'voicemaster' && '🎙️ Voice'}
+                    {tabKey === 'tickets' && '🎫 Tickets'}
                   </button>
                 ))}
               </div>
 
-              {/* Terminal Command Input */}
-              <div className="terminal-command-bar">
-                <span className="command-prompt">user@server:~$</span>
-                <code className="command-text">{currentDemo.command}</code>
-                <button
-                  type="button"
-                  className="copy-chip-btn"
-                  onClick={() => copyCommandText(currentDemo.command)}
-                  title="Copy command"
-                >
-                  {copiedCmd === currentDemo.command ? '✓ Copied' : 'Copy'}
-                </button>
-              </div>
-
-              {/* Simulated Discord Embed Response */}
-              <div className="discord-embed-simulator">
-                <div className="discord-bot-author">
-                  <img
-                    src="https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024"
-                    alt="Cya"
-                    className="discord-bot-avatar"
-                    referrerPolicy="no-referrer"
-                  />
-                  <div>
-                    <span className="bot-name">Cya</span>
-                    <span className="bot-tag">BOT</span>
-                    <span className="bot-time">Just now</span>
-                  </div>
+              <div className="terminal-body">
+                {/* Simulated Slash Command Input */}
+                <div className="terminal-command-bar">
+                  <span className="slash-prompt">/</span>
+                  <code className="command-string">{currentDemo.command.replace(/^\//, '')}</code>
+                  <button
+                    type="button"
+                    className="copy-cmd-btn"
+                    onClick={() => copyCommandText(currentDemo.command)}
+                    title="Copy command"
+                  >
+                    {copiedCmd === currentDemo.command ? '✓ Copied' : 'Copy'}
+                  </button>
                 </div>
 
-                <div
-                  className="discord-embed"
-                  style={{ borderLeftColor: currentDemo.response.color }}
-                >
-                  <h4 className="embed-title">{currentDemo.response.title}</h4>
-                  <p className="embed-description">{currentDemo.description}</p>
-
-                  <div className="embed-fields-grid">
-                    {currentDemo.response.fields.map((field, idx) => (
-                      <div
-                        key={idx}
-                        className={`embed-field ${field.inline ? 'inline' : 'full'}`}
-                      >
-                        <span className="field-name">{field.name}</span>
-                        <span className="field-val">{field.value}</span>
-                      </div>
-                    ))}
+                {/* Simulated Bot Embed Response */}
+                <div className="bot-response-card">
+                  <div className="bot-response-header">
+                    <img
+                      src="https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024"
+                      alt="cya"
+                      className="bot-mini-avatar"
+                      referrerPolicy="no-referrer"
+                    />
+                    <div>
+                      <span className="bot-name">Cya</span>
+                      <span className="bot-tag">BOT</span>
+                      <span className="bot-time">Just now</span>
+                    </div>
                   </div>
 
-                  <div className="embed-footer">
-                    <span>{currentDemo.response.footer}</span>
+                  <div
+                    className="discord-embed"
+                    style={{ borderLeftColor: currentDemo.response.color }}
+                  >
+                    <h4 className="embed-title">{currentDemo.response.title}</h4>
+                    <p className="embed-description">{currentDemo.description}</p>
+
+                    <div className="embed-fields-grid">
+                      {currentDemo.response.fields.map((field, idx) => (
+                        <div
+                          key={idx}
+                          className={`embed-field ${field.inline ? 'inline' : 'full'}`}
+                        >
+                          <span className="field-name">{field.name}</span>
+                          <span className="field-val">{field.value}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="embed-footer">
+                      <span>{currentDemo.response.footer}</span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </section>
+
+      {/* Neo-Brutalist Direct Upgrade Slab + Live Activity Monitor */}
+      <section className="content-width" style={{ marginTop: '24px', marginBottom: '48px', position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', gap: '24px' }}>
+        <article className="bento-cell brutalist-cell" style={{ padding: '24px 28px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '20px' }}>
+            <div style={{ maxWidth: '520px' }}>
+              <span className="bento-paradigm-label">NEO-BRUTALIST DIRECT UPGRADE</span>
+              <h3 style={{ margin: '0 0 6px 0', fontSize: '24px' }}>No-Prefix Mode, Custom Embeds &amp; Custom Bot Branding</h3>
+              <p style={{ margin: 0, fontSize: '14px', color: '#94a3b8' }}>
+                Unlock No-Prefix access, unlimited embeds &amp; buttons on Starter (160 Rs), or customize Cya's logo &amp; name on Pro/Premium (310 Rs).
+              </p>
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
+              <div className="brutalist-price-row tabular-nums" style={{ margin: 0, minWidth: '250px' }}>
+                <div>
+                  <small>STARTER</small>
+                  <strong>160 Rs<span>/mo</span></strong>
+                </div>
+                <div>
+                  <small>PREMIUM</small>
+                  <strong>310 Rs<span>/mo</span></strong>
+                </div>
+              </div>
+              <button
+                type="button"
+                className="brutalist-action-btn"
+                style={{ width: 'auto', padding: '14px 22px' }}
+                onClick={() => onNavigate('/billing')}
+              >
+                Upgrade Now →
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <ActivityMonitor status={status} onRefresh={refresh} compact />
       </section>
 
       {/* Feature Showcase Grid */}
@@ -322,13 +363,13 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               Autonomous heuristics detect mass channel wipes, unauthorized bot additions, webhook floods, and mass bans instantly. Offending staff roles are stripped and culprits isolated before damage spreads.
             </p>
             <div className="feature-highlights">
-              <span>✓ Mass-ban prevention</span>
-              <span>✓ Webhook tamper guard</span>
-              <span>✓ Role hierarchy freeze</span>
+              <span>✓ Mass-ban &amp; kick prevention</span>
+              <span>✓ Instant role &amp; channel recovery</span>
+              <span>✓ Granular staff whitelisting</span>
             </div>
           </div>
 
-          {/* Card 2: Studio Audio */}
+          {/* Card 2: Lossless Music */}
           <div className="cya-feature-card">
             <div className="feature-card-top">
               <div className="feature-icon-circle">
@@ -338,20 +379,20 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                   <circle cx="18" cy="16" r="3"/>
                 </svg>
               </div>
-              <span className="feature-badge">320kbps Audio</span>
+              <span className="feature-badge">24/7 Audio</span>
             </div>
-            <h3>Studio-Grade Music Engine</h3>
+            <h3>Lossless Music Player</h3>
             <p>
-              Stream crystal clear music with 0% stutter. Supports playlists, Spotify integration, SoundCloud, 8D audio, bassboost, Nightcore, and 24/7 dedicated voice channel presence.
+              Crystal-clear 320kbps audio streaming with instant playback. Apply live bassboost, nightcore, or 8D spatial filters without interrupting the queue.
             </p>
             <div className="feature-highlights">
-              <span>✓ Multi-platform streaming</span>
-              <span>✓ 15+ real-time audio filters</span>
-              <span>✓ 24/7 radio continuous playback</span>
+              <span>✓ Multi-source streaming</span>
+              <span>✓ Real-time audio filters</span>
+              <span>✓ 24/7 non-stop radio mode</span>
             </div>
           </div>
 
-          {/* Card 3: Deep AutoMod */}
+          {/* Card 3: Smart AutoMod */}
           <div className="cya-feature-card">
             <div className="feature-card-top">
               <div className="feature-icon-circle">
@@ -359,20 +400,20 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                   <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
                 </svg>
               </div>
-              <span className="feature-badge">Heuristic AI</span>
+              <span className="feature-badge">Smart Filter</span>
             </div>
-            <h3>Autonomous AutoMod</h3>
+            <h3>Intelligent AutoMod</h3>
             <p>
-              Keep chats clean and welcoming. Real-time spam prevention, Discord invite link interception, token grabbing protection, and custom regex pattern filters that enforce your guidelines.
+              Automatically intercept phishing links, token grabbers, invite spam, and mass-mention raids. Configurable punishment ladders keep chat clean around the clock.
             </p>
             <div className="feature-highlights">
-              <span>✓ Phishing & malicious domain block</span>
-              <span>✓ Anti-ghost ping detection</span>
-              <span>✓ Escalating infraction timeouts</span>
+              <span>✓ Anti-scam &amp; phishing shield</span>
+              <span>✓ Anti-spam &amp; raid mode lockdown</span>
+              <span>✓ Automated warn &amp; mute ladders</span>
             </div>
           </div>
 
-          {/* Card 4: VoiceMaster Dynamic Channels */}
+          {/* Card 4: VoiceMaster */}
           <div className="cya-feature-card">
             <div className="feature-card-top">
               <div className="feature-icon-circle">
@@ -383,118 +424,92 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                   <line x1="8" y1="23" x2="16" y2="23"/>
                 </svg>
               </div>
-              <span className="feature-badge">Voice Hub</span>
+              <span className="feature-badge">Dynamic Rooms</span>
             </div>
-            <h3>VoiceMaster System</h3>
+            <h3>VoiceMaster Channels</h3>
             <p>
-              Eliminate empty voice channels cluttering your server list. Members join a single generator channel to spawn their own private temporary voice room with control panels to lock, mute, and name.
+              Let members spawn their own temporary voice channels by joining a hub. Includes an interactive control panel to lock, hide, rename, or adjust user limits.
             </p>
             <div className="feature-highlights">
-              <span>✓ Auto-delete when empty</span>
-              <span>✓ In-channel interactive buttons</span>
-              <span>✓ Custom bitrate & user limits</span>
+              <span>✓ Join-to-create voice hubs</span>
+              <span>✓ In-chat voice control dashboard</span>
+              <span>✓ Zero empty channel clutter</span>
             </div>
           </div>
 
-          {/* Card 5: Ticket Desks */}
+          {/* Card 5: Ticketing System */}
           <div className="cya-feature-card">
             <div className="feature-card-top">
               <div className="feature-icon-circle">
                 <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                  <polyline points="14 2 14 8 20 8"/>
-                  <line x1="16" y1="13" x2="8" y2="13"/>
-                  <line x1="16" y1="17" x2="8" y2="17"/>
-                  <polyline points="10 9 9 9 8 9"/>
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
                 </svg>
               </div>
-              <span className="feature-badge">Helpdesk</span>
+              <span className="feature-badge">Support Desk</span>
             </div>
-            <h3>Ticket & Support Panels</h3>
+            <h3>Multi-Panel Tickets</h3>
             <p>
-              Clean, professional customer service and community inquiries. Custom dropdown select menus, modal intake forms, transcript generation, and private support channels with ping notifications.
+              Streamline staff support with sleek button and select-menu ticket panels. Automatically generates full HTML transcripts and logs resolution metrics.
             </p>
             <div className="feature-highlights">
-              <span>✓ HTML transcripts auto-archived</span>
-              <span>✓ Multi-department routing</span>
-              <span>✓ One-click claim and close</span>
+              <span>✓ Custom dropdown select menus</span>
+              <span>✓ Cloud HTML ticket transcripts</span>
+              <span>✓ Staff claim &amp; priority tags</span>
             </div>
           </div>
 
-          {/* Card 6: Engagement & Social */}
+          {/* Card 6: Leveling, Giveaways & Utility */}
           <div className="cya-feature-card">
             <div className="feature-card-top">
               <div className="feature-icon-circle">
                 <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
                 </svg>
               </div>
               <span className="feature-badge">Engagement</span>
             </div>
-            <h3>Leveling & Community Utility</h3>
+            <h3>Leveling, Giveaways &amp; Welcomer</h3>
             <p>
-              Reward active members with XP rank cards, leaderboard roles, customizable welcome banners, reaction roles, giveaways, and 120+ utility commands for server info, avatars, banners, and stats.
+              Reward active members with customizable XP rank cards, role rewards, automated reaction giveaways, and personalized welcome banners.
             </p>
             <div className="feature-highlights">
               <span>✓ Custom XP rank cards</span>
               <span>✓ Automated role rewards</span>
-              <span>✓ Advanced giveaway system</span>
+              <span>✓ Smart giveaway host</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Interactive Command Search Bar Callout */}
-      <section className="cya-commands-callout content-width">
-        <div className="commands-callout-inner">
-          <div className="callout-content">
-            <h3>Looking for specific commands?</h3>
-            <p>Explore all {commandCount} documented slash and prefix commands with arguments, examples, and permission breakdowns.</p>
-          </div>
-          <button
-            type="button"
-            className="callout-btn"
-            onClick={() => onNavigate('/commands')}
-          >
-            <span>Open Command Directory ({commandCount})</span>
-            <span>↗</span>
-          </button>
-        </div>
-      </section>
-
-      {/* Final Call to Action */}
-      <section className="cya-cta-wrapper content-width">
-        <div className="cya-cta-card">
-          <div className="cta-glow-disc" aria-hidden="true"></div>
-          <div className="cta-content-box">
-            <img
-              src="https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024"
-              alt="Cya Logo"
-              className="cta-avatar"
-              referrerPolicy="no-referrer"
-            />
-            <h2>Level up your server with Cya.</h2>
-            <p>Setup takes less than 60 seconds. Add Cya today and experience a faster, safer, and cleaner Discord server.</p>
+      {/* Final CTA Banner */}
+      <section className="cya-cta-section content-width" aria-labelledby="cta-heading">
+        <div className="cya-cta-banner">
+          <div className="cta-glow-orb" aria-hidden="true"></div>
+          <div className="cta-content">
+            <span className="cta-tag">Ready in 10 Seconds</span>
+            <h2 id="cta-heading">Upgrade your Discord server with Cya today.</h2>
+            <p>
+              Join {formatNumber(serverCount)} communities already using Cya for antinuke defense, music, and moderation.
+            </p>
             <div className="cta-buttons">
               <a
-                className="cya-btn-primary large"
+                className="cya-btn-primary"
                 href={config.inviteUrl}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <svg className="discord-svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                  <path d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.075.075 0 0 0-.079.037c-.211.375-.445.865-.608 1.25a18.27 18.27 0 0 0-5.487 0c-.164-.394-.405-.875-.618-1.25a.077.077 0 0 0-.078-.037A19.74 19.74 0 0 0 3.677 4.37a.07.07 0 0 0-.032.028C.935 9.046-.319 13.58.099 18.058a.082.082 0 0 0 .031.056c2.053 1.508 4.042 2.423 5.993 3.03a.077.077 0 0 0 .084-.028c.461-.63.873-1.295 1.226-1.994a.077.077 0 0 0-.042-.105 12.3 12.3 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .078-.01c3.927 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .079.01c.12.099.246.198.373.292a.077.077 0 0 1-.007.127 12.3 12.3 0 0 1-1.873.891.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.029 19.84 19.84 0 0 0 6.002-3.03.082.082 0 0 0 .032-.055c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028ZM8.02 15.331c-1.183 0-2.157-1.086-2.157-2.419s.956-2.419 2.157-2.419 2.176 1.096 2.157 2.419c0 1.333-.955 2.419-2.157 2.419Zm7.975 0c-1.183 0-2.157-1.086-2.157-2.419s.955-2.419 2.157-2.419 2.176 1.096 2.157 2.419c0 1.333-.946 2.419-2.157 2.419Z"/>
-                </svg>
-                <span>Authorize & Invite Cya</span>
+                <span>Add Cya to Discord</span>
               </a>
-              <a
-                className="cya-btn-secondary large"
-                href={config.supportServerUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                type="button"
+                className="cya-btn-secondary"
+                onClick={() => onNavigate('/billing')}
               >
-                <span>Join Support Server</span>
-              </a>
+                <span>View Pricing Plans</span>
+              </button>
             </div>
           </div>
         </div>

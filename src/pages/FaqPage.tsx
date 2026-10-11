@@ -31,7 +31,10 @@ export const FaqPage: React.FC<FaqPageProps> = ({ onNavigate }) => {
             <p className="faq-eyebrow">Help center</p>
             <h1>Frequently asked questions</h1>
             <p className="faq-intro">
-              Answers to the things server owners usually want to know before adding Hedwig.
+              Answers to the things server owners usually want to know before adding Cya. Need direct assistance? Email{' '}
+              <a href="mailto:cyabot@zohomail.com" style={{ color: '#22d3ee', fontWeight: 600 }}>
+                cyabot@zohomail.com
+              </a>
             </p>
 
             <div style={{ maxWidth: '520px', margin: '24px auto 0' }}>

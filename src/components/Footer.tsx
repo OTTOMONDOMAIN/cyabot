@@ -10,7 +10,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, variant = 'default' 
   const config = useConfig();
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
-    if (path.startsWith('http')) return;
+    if (path.startsWith('http') || path.startsWith('mailto:')) return;
     e.preventDefault();
     onNavigate(path);
   };
@@ -33,7 +33,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, variant = 'default' 
           justifyContent: 'center',
           flexWrap: 'wrap',
           gap: '12px 20px',
-          marginBottom: '20px',
+          marginBottom: '16px',
           fontSize: '13px',
           color: '#8b8e96',
         }}
@@ -54,14 +54,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, variant = 'default' 
           FAQ
         </a>
         <a
-          href="https://docs.hedwig.site"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:text-white transition-colors"
-        >
-          Docs
-        </a>
-        <a
           href={config.inviteUrl}
           target="_blank"
           rel="noopener noreferrer"
@@ -70,16 +62,32 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, variant = 'default' 
           Invite
         </a>
         <a
-          href={config.supportServerUrl}
+          href={config.supportServerUrl || 'https://dsc.gg/cyaa'}
           target="_blank"
           rel="noopener noreferrer"
           className="hover:text-white transition-colors"
         >
           Support
         </a>
+        <a
+          href="mailto:cyabot@zohomail.com"
+          className="hover:text-white transition-colors"
+          style={{ color: '#22d3ee', fontWeight: 600 }}
+        >
+          cyabot@zohomail.com
+        </a>
       </div>
+      <p style={{ margin: '0 0 8px 0', fontSize: '13px', color: '#94a3b8' }}>
+        Official Mail:{' '}
+        <a
+          href="mailto:cyabot@zohomail.com"
+          style={{ color: '#22d3ee', textDecoration: 'none', fontWeight: 600 }}
+        >
+          cyabot@zohomail.com
+        </a>
+      </p>
       <p style={{ margin: 0, fontSize: '13px', color: '#555860' }}>
-        © 2026 cya.site - Operated by itsfizys
+        © 2026 cya.lat - Operated by for.av
       </p>
     </footer>
   );
