@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useConfig, useStatus, useCommands } from '../hooks/useData';
+import type { FeaturedServerItem } from '../types';
+import fallbackFeatured from '../data/featured_servers.json';
 import { Footer } from '../components/Footer';
 import { ActivityMonitor } from '../components/ActivityMonitor';
 
@@ -12,19 +14,59 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
   const { status, refresh } = useStatus(5000);
   const { commands } = useCommands();
 
-  const [activeTab, setActiveTab] = useState<'antinuke' | 'music' | 'automod' | 'voicemaster' | 'tickets'>('antinuke');
+  const [activeTab, setActiveTab] = useState<'antinuke' | 'music' | 'automod' | 'voicemaster' | 'tickets'>('tickets');
   const [copiedCmd, setCopiedCmd] = useState<string | null>(null);
+  const [actionFeedback, setActionFeedback] = useState<string | null>(null);
+  const [featuredServers, setFeaturedServers] = useState<FeaturedServerItem[]>(fallbackFeatured as FeaturedServerItem[]);
+
+  useEffect(() => {
+    const fetchFeatured = async () => {
+      try {
+        const res = await fetch('/api/featured-servers');
+        if (res.ok) {
+          const data = await res.json();
+          if (Array.isArray(data.servers) && data.servers.length > 0) {
+            setFeaturedServers(data.servers);
+          }
+        }
+      } catch {}
+    };
+    fetchFeatured();
+    const interval = setInterval(fetchFeatured, 25000);
+    return () => clearInterval(interval);
+  }, []);
 
   const formatNumber = (num: number) => new Intl.NumberFormat('en-US').format(num || 0);
+  const formatCompactMembers = (num: number) => {
+    if (!num) return '0';
+    if (num >= 1000) {
+      const k = num / 1000;
+      return `${k >= 10 ? Math.round(k) : Number(k.toFixed(1))}k`;
+    }
+    return formatNumber(num);
+  };
 
-  const serverCount = status?.servers ?? 0;
-  const userCount = status?.users ?? 0;
+  const featuredTotalMembers = featuredServers.reduce((acc, s) => acc + (Number(s.memberCount) || 0), 0);
+  const serverCount = Math.max(status?.servers ?? 0, featuredServers.length);
+  const userCount = Math.max(status?.users ?? 0, featuredTotalMembers);
   const commandCount = status?.commands ?? commands?.length ?? 45;
 
   const copyCommandText = (cmd: string) => {
     navigator.clipboard.writeText(cmd);
     setCopiedCmd(cmd);
     setTimeout(() => setCopiedCmd(null), 1800);
+  };
+
+  const handleActionClick = (label: string) => {
+    let msg = `Executed: ${label}`;
+    if (label.includes('Ticket')) msg = 'Created private channel: #ticket-0412';
+    else if (label.includes('Lock')) msg = 'Room locked: @everyone cannot join';
+    else if (label.includes('Pause')) msg = 'Music playback paused';
+    else if (label.includes('Skip')) msg = 'Track skipped to next in queue';
+    else if (label.includes('Whitelist')) msg = 'Admin added to safe whitelist';
+    else if (label.includes('Scan')) msg = 'Server security scan complete: 0 vulnerabilities';
+    setActionFeedback(msg);
+    setTimeout(() => setActionFeedback(null), 2500);
   };
 
   const interactiveDemos = {
@@ -43,6 +85,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         ],
         footer: 'Cya Security Core v4.2 · Microsecond Response Time',
       },
+      actionButtons: [
+        { id: 'wl', label: '🛡️ Whitelist Admin', style: 'primary' },
+        { id: 'cfg', label: '⚙️ Configure Thresholds', style: 'secondary' },
+      ],
     },
     music: {
       title: 'Studio-Grade Lossless Music',
@@ -59,6 +105,12 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         ],
         footer: 'Requested by You · Audio Stream Node #1 (12ms latency)',
       },
+      actionButtons: [
+        { id: 'p', label: '⏸️ Pause', style: 'secondary' },
+        { id: 's', label: '⏭️ Skip', style: 'secondary' },
+        { id: 'l', label: '🔁 Loop Queue', style: 'secondary' },
+        { id: 'st', label: '⏹️ Stop', style: 'secondary' },
+      ],
     },
     automod: {
       title: 'Smart Moderation & Anti-Phishing',
@@ -74,6 +126,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         ],
         footer: 'Monitored across all public channels',
       },
+      actionButtons: [
+        { id: 'scan', label: '⚡ Run Security Scan', style: 'primary' },
+        { id: 'filt', label: '🚫 Phishing Shield', style: 'secondary' },
+      ],
     },
     voicemaster: {
       title: 'Dynamic Voice Channels on Demand',
@@ -89,6 +145,11 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         ],
         footer: 'VoiceMaster Engine · Instant channel provisioning',
       },
+      actionButtons: [
+        { id: 'lock', label: '🔒 Lock Room', style: 'secondary' },
+        { id: 'lim', label: '👥 User Limit: 4', style: 'secondary' },
+        { id: 'ren', label: '✏️ Rename Room', style: 'secondary' },
+      ],
     },
     tickets: {
       title: 'Organized Multi-Category Support',
@@ -102,12 +163,17 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           { name: 'Transcript Mode', value: 'Auto-save HTML to Cloud', inline: true },
           { name: 'Ping Roles', value: '@Support Team, @Moderator', inline: true },
         ],
-        footer: 'Ready for community inquiries',
+        footer: 'Ready for community inquiries · Click below to open a ticket',
       },
+      actionButtons: [
+        { id: 'create', label: '📩 Create Ticket', style: 'primary' },
+        { id: 'cats', label: '📋 Select Category', style: 'secondary' },
+      ],
     },
   };
 
   const currentDemo = interactiveDemos[activeTab];
+  const marqueeItems = [...featuredServers, ...featuredServers, ...featuredServers];
 
   return (
     <main id="top" className="cya-home">
@@ -229,7 +295,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                     {tabKey === 'antinuke' && '🛡️ Antinuke'}
                     {tabKey === 'music' && '🎵 Music'}
                     {tabKey === 'automod' && '⚡ AutoMod'}
-                    {tabKey === 'voicemaster' && '🎙️ Voice'}
+                    {tabKey === 'voicemaster' && '🎙️ VoiceMaster'}
                     {tabKey === 'tickets' && '🎫 Tickets'}
                   </button>
                 ))}
@@ -259,7 +325,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                       className="bot-mini-avatar"
                       referrerPolicy="no-referrer"
                     />
-                    <div>
+                    <div className="bot-author-info">
                       <span className="bot-name">Cya</span>
                       <span className="bot-tag">BOT</span>
                       <span className="bot-time">Just now</span>
@@ -270,7 +336,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                     className="discord-embed"
                     style={{ borderLeftColor: currentDemo.response.color }}
                   >
-                    <h4 className="embed-title">{currentDemo.response.title}</h4>
+                    <h2 className="embed-title">{currentDemo.response.title}</h2>
                     <p className="embed-description">{currentDemo.description}</p>
 
                     <div className="embed-fields-grid">
@@ -289,9 +355,96 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                       <span>{currentDemo.response.footer}</span>
                     </div>
                   </div>
+
+                  {/* Simulated Discord Interactive Action Buttons */}
+                  {currentDemo.actionButtons && currentDemo.actionButtons.length > 0 && (
+                    <div className="discord-components-row">
+                      {currentDemo.actionButtons.map((btn) => (
+                        <button
+                          key={btn.id}
+                          type="button"
+                          className={`discord-btn ${btn.style === 'primary' ? 'discord-btn-primary' : 'discord-btn-secondary'}`}
+                          onClick={() => handleActionClick(btn.label)}
+                        >
+                          {btn.label}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+
+                  {actionFeedback && (
+                    <div className="discord-btn-feedback">
+                      ✓ {actionFeedback}
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Animated Moving Community Server Showcase (Slug-Style Marquee + Live Discord Widgets) */}
+      <section className="cya-communities-showcase" aria-label="Featured Communities Powered by Cya">
+        <div className="cya-communities-header">
+          <p className="cya-communities-powering">
+            Powering <strong>{formatNumber(userCount)}</strong> users across <strong>{formatNumber(serverCount)}</strong> communities
+          </p>
+        </div>
+
+        <div className="cya-marquee-viewport">
+          <div className="cya-marquee-track">
+            {marqueeItems.map((srv, idx) => {
+              const badgeColorHex = srv.badgeColor === 'blue' ? '#3b82f6' : '#10b981';
+              return (
+                <div
+                  key={`${srv.id}-${idx}`}
+                  className="cya-community-pill"
+                >
+                  <div className="cya-community-avatar-wrap">
+                    <img
+                      src={srv.iconUrl || 'https://cdn.discordapp.com/embed/avatars/0.png'}
+                      alt={srv.name}
+                      className="cya-community-avatar"
+                      referrerPolicy="no-referrer"
+                      onError={(e) => {
+                        (e.currentTarget as HTMLImageElement).src =
+                          'https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=256';
+                      }}
+                    />
+                  </div>
+
+                  <div className="cya-community-meta">
+                    <div className="cya-community-title-row">
+                      <span className="cya-community-name">{srv.name}</span>
+                      <span className="cya-verified-badge" title="Verified Cya Community">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill={badgeColorHex}>
+                          <path d="M12 2L14.8 4.5L18.5 4.2L19.5 7.8L22.5 10L21.2 13.5L22.5 17L19.5 19.2L18.5 22.8L14.8 22.5L12 25L9.2 22.5L5.5 22.8L4.5 19.2L1.5 17L2.8 13.5L1.5 10L4.5 7.8L5.5 4.2L9.2 4.5L12 2Z" />
+                          <path
+                            d="M9.5 13.2L11.2 14.9L15.2 10.9"
+                            fill="none"
+                            stroke="#ffffff"
+                            strokeWidth="2.2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </span>
+                    </div>
+
+                    <div className="cya-community-members">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                      </svg>
+                      <span>{formatCompactMembers(srv.memberCount)} members</span>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -301,22 +454,22 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         <article className="bento-cell brutalist-cell" style={{ padding: '24px 28px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '20px' }}>
             <div style={{ maxWidth: '520px' }}>
-              <span className="bento-paradigm-label">NEO-BRUTALIST DIRECT UPGRADE</span>
-              <h3 style={{ margin: '0 0 6px 0', fontSize: '24px' }}>No-Prefix Mode, Custom Embeds &amp; Custom Bot Branding</h3>
+              <span className="bento-paradigm-label">Direct Server Upgrade</span>
+              <h2 style={{ margin: '0 0 6px 0', fontSize: '24px' }}>No-Prefix Mode, Custom Embeds &amp; Custom Bot Branding</h2>
               <p style={{ margin: 0, fontSize: '14px', color: '#94a3b8' }}>
-                Unlock No-Prefix access, unlimited embeds &amp; buttons on Starter (160 Rs), or customize Cya's logo &amp; name on Pro/Premium (310 Rs).
+                Unlock No-Prefix access, unlimited embeds &amp; buttons on Starter, or customize Cya's branding on Premium. Regional prices in INR (₹99), PKR (160 Rs), and USD ($1.99) with UPI, EasyPaisa, &amp; Crypto.
               </p>
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
-              <div className="brutalist-price-row tabular-nums" style={{ margin: 0, minWidth: '250px' }}>
+              <div className="brutalist-price-row tabular-nums" style={{ margin: 0, minWidth: '270px' }}>
                 <div>
                   <small>STARTER</small>
-                  <strong>160 Rs<span>/mo</span></strong>
+                  <strong>₹99 / $1.99<span>/mo</span></strong>
                 </div>
                 <div>
                   <small>PREMIUM</small>
-                  <strong>310 Rs<span>/mo</span></strong>
+                  <strong>₹199 / $3.99<span>/mo</span></strong>
                 </div>
               </div>
               <button

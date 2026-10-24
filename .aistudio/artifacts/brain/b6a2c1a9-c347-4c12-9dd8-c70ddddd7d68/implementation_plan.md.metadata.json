@@ -1,0 +1,6 @@
+{
+  "summary": "Detailed guide and plan explaining environment variables (APP_URL, PORT, DISCORD_CLIENT_ID, DISCORD_CLIENT_SECRET, DISCORD_BOT_TOKEN) and Discord Developer Portal OAuth2 Redirect URI configuration for hosting or changing domains.",
+  "updatedAt": "2026-10-12T14:04:42.480601399Z",
+  "requestFeedback": true,
+  "userFacing": true
+}

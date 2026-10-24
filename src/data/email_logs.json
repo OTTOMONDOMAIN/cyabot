@@ -1,0 +1,22 @@
+[
+  {
+    "id": "EML-mvifr6f9-ndmv",
+    "to": "user@discord.gg",
+    "from": "\"Cya Bot Billing\" <cyabot@zohomail.com>",
+    "subject": "Announcement | Cya Bot",
+    "type": "bot_mail",
+    "status": "simulated",
+    "details": "From: cya#0001 | Subject: Announcement [Simulated: Set SMTP_PASS in .env to deliver real Zoho/Gmail emails]",
+    "timestamp": "2026-10-21T18:18:35.973Z"
+  },
+  {
+    "id": "EML-mvifr27c-k7ud",
+    "to": "test@example.com",
+    "from": "\"Cya Bot Billing\" <cyabot@zohomail.com>",
+    "subject": "🧪 Test Email Verification | Cya Bot Mail Delivery",
+    "type": "test",
+    "status": "simulated",
+    "details": "Admin live test sent to test@example.com [Simulated: Set SMTP_PASS in .env to deliver real Zoho/Gmail emails]",
+    "timestamp": "2026-10-21T18:18:30.504Z"
+  }
+]

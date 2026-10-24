@@ -16,5 +16,11 @@
     "accountTitle": "Binance Pay / USDT (TRC20)",
     "accountNumber": "TXYZ...USDT_WALLET_OR_BINANCE_ID",
     "instructions": "Scan the Binance Pay / USDT QR code, enter your Sender UID or Wallet / Contact below, and click Done after sending."
+  },
+  "UPI": {
+    "qrCodeUrl": "",
+    "accountTitle": "Cya Bot Official (UPI)",
+    "accountNumber": "cya@upi",
+    "instructions": "Scan the UPI QR code using Google Pay, PhonePe, Paytm, or BHIM, enter your UPI ID or mobile number below, and click Done after sending."
   }
 }

@@ -12,12 +12,14 @@ import { AdminPage } from './pages/AdminPage';
 import { StatusPage } from './pages/StatusPage';
 import { FaqPage } from './pages/FaqPage';
 import { LegalPage } from './pages/LegalPage';
+import { DashboardPage } from './pages/DashboardPage';
 
 export default function App() {
   const getInitialRoute = () => {
     if (typeof window !== 'undefined') {
       const hash = window.location.hash.replace(/^#\/?/, '').toLowerCase();
       if (hash === 'admin') return '/admin';
+      if (hash === 'dashboard') return '/dashboard';
       const p = window.location.pathname.toLowerCase();
       return p === '' ? '/' : p;
     }
@@ -31,6 +33,10 @@ export default function App() {
       const hash = window.location.hash.replace(/^#\/?/, '').toLowerCase();
       if (hash === 'admin') {
         setCurrentPath('/admin');
+        return;
+      }
+      if (hash === 'dashboard') {
+        setCurrentPath('/dashboard');
         return;
       }
       const p = window.location.pathname.toLowerCase();
@@ -72,10 +78,15 @@ export default function App() {
 
   const normalized = currentPath.replace(/\/+$/, '') || '/';
   const isAdminRoute = normalized === '/admin' || normalized === '/admin.html';
+  const isDashboardRoute = normalized === '/dashboard' || normalized === '/dashboard.html';
 
   const renderContent = () => {
     if (isAdminRoute) {
       return <AdminPage onNavigate={navigate} />;
+    }
+
+    if (isDashboardRoute) {
+      return <DashboardPage onNavigate={navigate} />;
     }
 
     if (normalized === '/' || normalized === '/index.html' || normalized === '') {
@@ -120,7 +131,7 @@ export default function App() {
 
   return (
     <div className="hedwig-app" style={{ minHeight: '100vh', backgroundColor: '#05070a', color: '#f0f1f4' }}>
-      {!isAdminRoute && <Header currentPath={currentPath} onNavigate={navigate} />}
+      {!isAdminRoute && !isDashboardRoute && <Header currentPath={currentPath} onNavigate={navigate} />}
       {renderContent()}
     </div>
   );

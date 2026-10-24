@@ -24,10 +24,75 @@ interface MethodPaymentConfig {
   instructions: string;
 }
 
+export type RegionCode = 'IN' | 'PK' | 'US';
+
+export interface RegionPricingConfig {
+  code: RegionCode;
+  countryName: string;
+  flag: string;
+  currencyCode: string;
+  currencySymbol: string;
+  starterMonthly: number;
+  starterAnnual: number;
+  premiumMonthly: number;
+  premiumAnnual: number;
+  defaultMethod: 'EasyPaisa' | 'JazzCash' | 'Crypto' | 'UPI';
+}
+
+export const REGIONAL_PRICING: Record<RegionCode, RegionPricingConfig> = {
+  IN: {
+    code: 'IN',
+    countryName: 'India',
+    flag: '🇮🇳',
+    currencyCode: 'INR',
+    currencySymbol: '₹',
+    starterMonthly: 99,
+    starterAnnual: 999,
+    premiumMonthly: 199,
+    premiumAnnual: 1999,
+    defaultMethod: 'UPI',
+  },
+  PK: {
+    code: 'PK',
+    countryName: 'Pakistan',
+    flag: '🇵🇰',
+    currencyCode: 'PKR',
+    currencySymbol: 'Rs',
+    starterMonthly: 160,
+    starterAnnual: 1632,
+    premiumMonthly: 310,
+    premiumAnnual: 3162,
+    defaultMethod: 'EasyPaisa',
+  },
+  US: {
+    code: 'US',
+    countryName: 'United States & Global',
+    flag: '🇺🇸',
+    currencyCode: 'USD',
+    currencySymbol: '$',
+    starterMonthly: 1.99,
+    starterAnnual: 19.99,
+    premiumMonthly: 3.99,
+    premiumAnnual: 39.99,
+    defaultMethod: 'Crypto',
+  },
+};
+
+export const formatRegionalPrice = (amount: number, reg: RegionPricingConfig): string => {
+  if (reg.code === 'IN') {
+    return `₹${amount.toLocaleString('en-IN')}`;
+  }
+  if (reg.code === 'US') {
+    return `$${amount % 1 === 0 ? amount.toFixed(0) : amount.toFixed(2)}`;
+  }
+  return `${amount.toLocaleString()} Rs`;
+};
+
 interface AllPaymentSettings {
   EasyPaisa: MethodPaymentConfig;
   JazzCash: MethodPaymentConfig;
   Crypto: MethodPaymentConfig;
+  UPI: MethodPaymentConfig;
 }
 
 const DEFAULT_SETTINGS: AllPaymentSettings = {
@@ -49,19 +114,48 @@ const DEFAULT_SETTINGS: AllPaymentSettings = {
     accountNumber: 'TXYZ...USDT_WALLET_OR_BINANCE_ID',
     instructions: 'Scan the Binance Pay / USDT QR code, enter your Sender UID or Contact number below, and click Done after sending.',
   },
+  UPI: {
+    qrCodeUrl: '',
+    accountTitle: 'Cya Bot Official (UPI)',
+    accountNumber: 'cya@upi',
+    instructions: 'Scan the UPI QR code using Google Pay, PhonePe, Paytm, or BHIM, enter your UPI ID or mobile number below, and click Done after sending.',
+  },
+};
+
+const detectInitialRegion = (): RegionCode => {
+  try {
+    const saved = localStorage.getItem('cya_user_region') as RegionCode;
+    if (saved && REGIONAL_PRICING[saved]) return saved;
+
+    const tz = (Intl.DateTimeFormat().resolvedOptions().timeZone || '').toLowerCase();
+    if (tz.includes('calcutta') || tz.includes('kolkata')) return 'IN';
+    if (tz.includes('karachi')) return 'PK';
+
+    const lang = (navigator.language || '').toLowerCase();
+    if (lang.includes('-in')) return 'IN';
+    if (lang.includes('-pk')) return 'PK';
+  } catch {}
+  return 'IN';
 };
 
 export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
   const config = useConfig();
+  const [selectedRegion, setSelectedRegion] = useState<RegionCode>(detectInitialRegion);
   const [annual, setAnnual] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [upiCopied, setUpiCopied] = useState(false);
+
+  const currentRegion = REGIONAL_PRICING[selectedRegion];
 
   // Checkout & Verification State
   const [selectedPlan, setSelectedPlan] = useState<SelectedPlan | null>(null);
-  const [paymentMethod, setPaymentMethod] = useState<'EasyPaisa' | 'JazzCash' | 'Crypto'>('EasyPaisa');
+  const [paymentMethod, setPaymentMethod] = useState<'EasyPaisa' | 'JazzCash' | 'Crypto' | 'UPI'>(
+    currentRegion.defaultMethod
+  );
   const [phoneNumber, setPhoneNumber] = useState('');
   const [discordTag, setDiscordTag] = useState('');
   const [trxId, setTrxId] = useState('');
+  const [buyerEmail, setBuyerEmail] = useState('');
   const [formError, setFormError] = useState('');
 
   // Step: 'idle' | 'checkout' | 'verifying'
@@ -81,11 +175,20 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
             EasyPaisa: { ...DEFAULT_SETTINGS.EasyPaisa, ...data.EasyPaisa },
             JazzCash: { ...DEFAULT_SETTINGS.JazzCash, ...data.JazzCash },
             Crypto: { ...DEFAULT_SETTINGS.Crypto, ...data.Crypto },
+            UPI: { ...DEFAULT_SETTINGS.UPI, ...(data.UPI || {}) },
           });
         }
       })
       .catch(() => {});
   }, []);
+
+  const handleSelectRegion = (code: RegionCode) => {
+    setSelectedRegion(code);
+    try {
+      localStorage.setItem('cya_user_region', code);
+    } catch {}
+    setPaymentMethod(REGIONAL_PRICING[code].defaultMethod);
+  };
 
   // Poll transaction status if user is on verifying page and has a transaction ID
   useEffect(() => {
@@ -103,20 +206,21 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
     return () => clearInterval(timer);
   }, [flowStep, submittedTx?.id]);
 
-  // Monthly: 160 Rs / month, 310 Rs / month
-  // Annually (15% off per year): 1632 Rs / year, 3162 Rs / year
-  const starterPrice = annual ? 1632 : 160;
-  const premiumPrice = annual ? 3162 : 310;
+  // Current Regional Pricing figures
+  const starterPriceNumber = annual ? currentRegion.starterAnnual : currentRegion.starterMonthly;
+  const premiumPriceNumber = annual ? currentRegion.premiumAnnual : currentRegion.premiumMonthly;
+  const starterPriceDisplay = formatRegionalPrice(starterPriceNumber, currentRegion);
+  const premiumPriceDisplay = formatRegionalPrice(premiumPriceNumber, currentRegion);
   const periodUnit = annual ? '/ year' : '/ month';
 
   const currentMethodConfig = paymentSettings[paymentMethod] || DEFAULT_SETTINGS[paymentMethod];
 
-  // Live validation check for phone / wallet input
+  // Live validation check for phone / wallet / UPI input
   const phoneValidation = validatePaymentInput(paymentMethod, phoneNumber);
 
   const handleSelectPlan = (plan: SelectedPlan) => {
     setSelectedPlan(plan);
-    setPaymentMethod('EasyPaisa');
+    setPaymentMethod(currentRegion.defaultMethod);
     setFormError('');
     setSubmittedTx(null);
     setFinalSubmittedConfirmation(false);
@@ -129,6 +233,11 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
     const check = validatePaymentInput(paymentMethod, phoneNumber);
     if (!check.valid) {
       setFormError(check.error || 'Please enter a valid mobile number.');
+      return;
+    }
+
+    if (!buyerEmail.trim() || !buyerEmail.includes('@') || !buyerEmail.includes('.')) {
+      setFormError('Please enter a valid email address to receive your official order receipt.');
       return;
     }
 
@@ -150,6 +259,7 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
           phoneNumber: check.formatted,
           discordTag: discordTag.trim() || 'Not specified',
           trxId: trxId.trim() || `${paymentMethod} QR`,
+          email: buyerEmail.trim(),
         }),
       });
       const data = await res.json();
@@ -186,6 +296,7 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
             phoneNumber: check.formatted,
             discordTag: discordTag.trim() || 'Not specified',
             trxId: trxId.trim() || `${paymentMethod} QR`,
+            email: buyerEmail.trim(),
           }),
         });
         if (res.ok) {
@@ -212,6 +323,7 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
       phoneNumber,
       discordTag: discordTag || 'Not specified',
       trxId: trxId || `${paymentMethod} QR`,
+      email: buyerEmail.trim(),
       status: 'pending',
       createdAt: new Date().toISOString(),
     };
@@ -273,6 +385,33 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
       );
     }
 
+    if (paymentMethod === 'UPI') {
+      return (
+        <div className="qr-placeholder-art upi-theme">
+          <svg viewBox="0 0 120 120" width="126" height="126" fill="none">
+            <rect x="6" y="6" width="34" height="34" rx="4" stroke="#a855f7" strokeWidth="4" />
+            <rect x="15" y="15" width="16" height="16" rx="2" fill="#a855f7" />
+            <rect x="80" y="6" width="34" height="34" rx="4" stroke="#a855f7" strokeWidth="4" />
+            <rect x="89" y="15" width="16" height="16" rx="2" fill="#a855f7" />
+            <rect x="6" y="80" width="34" height="34" rx="4" stroke="#a855f7" strokeWidth="4" />
+            <rect x="15" y="89" width="16" height="16" rx="2" fill="#a855f7" />
+            <rect x="42" y="44" width="36" height="32" rx="6" fill="#3b0764" stroke="#a855f7" strokeWidth="2.5" />
+            <text x="60" y="64" textAnchor="middle" fill="#e9d5ff" fontSize="13" fontWeight="900" letterSpacing="0.5">UPI</text>
+            <rect x="48" y="12" width="10" height="10" fill="#c084fc" />
+            <rect x="66" y="20" width="8" height="16" fill="#cbd5e1" />
+            <rect x="12" y="50" width="14" height="8" fill="#cbd5e1" />
+            <rect x="30" y="62" width="8" height="12" fill="#cbd5e1" />
+            <rect x="84" y="50" width="12" height="8" fill="#c084fc" />
+            <rect x="100" y="64" width="10" height="10" fill="#cbd5e1" />
+            <rect x="52" y="86" width="16" height="8" fill="#cbd5e1" />
+            <rect x="80" y="84" width="12" height="12" fill="#a855f7" />
+            <rect x="98" y="96" width="14" height="14" fill="#c084fc" />
+          </svg>
+          <span className="qr-placeholder-tag" style={{ color: '#c084fc' }}>BHIM / UPI QR Slot</span>
+        </div>
+      );
+    }
+
     return (
       <div className="qr-placeholder-art crypto-theme">
         <svg viewBox="0 0 120 120" width="126" height="126" fill="none">
@@ -299,12 +438,12 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
 
   const faqs = [
     {
-      q: 'How much does it cost if I need more features?',
-      a: 'Our Starter plan is just 160 Rs/month (or 1,632 Rs/year with 15% off) and unlocks all premium features, No Prefix mode, unlimited custom embeds, AI commands, and early access to new commands. If you also want a custom bot profile picture and custom banner for your server, the Premium plan is 310 Rs/month (or 3,162 Rs/year).',
+      q: 'How much does it cost in my local currency (India, Pakistan, US)?',
+      a: 'We offer localized pricing tailored to each region: In India, Starter is just ₹99/mo (₹999/yr) and Premium is ₹199/mo (₹1,999/yr). In Pakistan, Starter is 160 Rs/mo (1,632 Rs/yr) and Premium is 310 Rs/mo (3,162 Rs/yr). In the US & Global, Starter is $1.99/mo ($19.99/yr) and Premium is $3.99/mo ($39.99/yr).',
     },
     {
-      q: 'How does EasyPaisa, JazzCash, or Crypto QR verification work?',
-      a: 'Simply select the 160 Rs or 310 Rs plan, choose your preferred payment method (EasyPaisa, JazzCash, or Crypto), scan the dedicated QR code, enter your real registered mobile number, and click Done. You will receive a downloadable official receipt and your payment will be verified by our admin team.',
+      q: 'How does UPI, EasyPaisa, JazzCash, or Crypto QR payment work?',
+      a: 'Simply select Starter or Premium, choose your preferred payment method (UPI for India, EasyPaisa / JazzCash for Pakistan, or Crypto / USDT globally), scan the dedicated QR or copy the UPI / Wallet ID, enter your real account reference, and click Done. You will receive an official downloadable receipt and our team verifies it swiftly.',
     },
     {
       q: 'What if my payment verification takes longer than expected?',
@@ -315,12 +454,12 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
       a: 'You can invite Cya to unlimited Discord servers on the Free Basic plan with access to standard commands, antinuke protection, and voice tools.',
     },
     {
-      q: 'What is the difference between Starter (160 Rs) and Premium (310 Rs)?',
-      a: 'The 160 Rs Starter plan gives you all core premium features including No Prefix mode, Unlimited Embeds, AI Commands, and Early View of new commands. The 310 Rs Premium plan includes everything in Starter plus a Custom Bot Profile Picture and Custom Banner exclusively for your server.',
+      q: 'What is the difference between Starter and Premium?',
+      a: 'The Starter plan gives you all core premium features including No Prefix mode, Unlimited Embeds, AI Commands, and Early View of new commands. The Premium plan includes everything in Starter plus a Custom Bot Profile Picture and Custom Banner exclusively for your server.',
     },
     {
-      q: 'Can I upgrade from the 160 Rs plan to the 310 Rs plan later?',
-      a: 'Yes! You can upgrade anytime by submitting the difference or selecting the 310 Rs Premium tier on your next billing cycle.',
+      q: 'Can I upgrade from Starter to Premium later?',
+      a: 'Yes! You can upgrade anytime by submitting the difference or selecting the Premium tier on your next billing cycle.',
     },
   ];
 
@@ -407,6 +546,18 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
                     <strong>{discordTag}</strong>
                   </div>
                 )}
+                {(submittedTx?.email || buyerEmail) && (
+                  <div className="detail-row">
+                    <span>Receipt &amp; Updates Email</span>
+                    <strong style={{ color: '#38bdf8' }}>{submittedTx?.email || buyerEmail}</strong>
+                  </div>
+                )}
+                {submittedTx?.status === 'rejected' && submittedTx.denialReason && (
+                  <div className="detail-row" style={{ background: 'rgba(239, 68, 68, 0.1)', padding: '8px 10px', borderRadius: '6px' }}>
+                    <span style={{ color: '#fca5a5' }}>Denial Note</span>
+                    <strong style={{ color: '#f87171' }}>{submittedTx.denialReason}</strong>
+                  </div>
+                )}
                 <div className="detail-row">
                   <span>Verification Status</span>
                   <span
@@ -415,7 +566,7 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
                     {submittedTx?.status === 'verified'
                       ? '✓ Verified by Admin'
                       : submittedTx?.status === 'rejected'
-                      ? '✕ Declined'
+                      ? '✕ Declined / Denied'
                       : '● Pending Admin Verification'}
                   </span>
                 </div>
@@ -453,7 +604,11 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
                 <div>
                   <strong>Sent to Admin Transaction Panel!</strong>
                   <p>
-                    Your transaction (<code>{submittedTx?.id}</code>) is now queued for verification. Save your downloaded receipt above and open a Discord ticket if verification takes more than 2 days.
+                    Your transaction (<code>{submittedTx?.id}</code>) is now queued for verification.
+                    {(submittedTx?.email || buyerEmail) && (
+                      <> An order confirmation has been emailed to <strong>{submittedTx?.email || buyerEmail}</strong> from <code>cyabot@zohomail.com</code>.</>
+                    )}
+                    {' '}Save your downloaded receipt above and open a Discord ticket if verification takes more than 2 days.
                   </p>
                 </div>
               </div>
@@ -509,6 +664,37 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
             <p className="wise-subtitle">
               Best in features that will help your Discord community scale faster
             </p>
+
+            {/* Regional Currency & Country Selector */}
+            <div className="wise-region-container">
+              <span className="wise-region-label">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                </svg>
+                Select Regional Pricing
+              </span>
+              <div className="wise-region-pills" role="radiogroup" aria-label="Select regional pricing">
+                {(Object.keys(REGIONAL_PRICING) as RegionCode[]).map((code) => {
+                  const reg = REGIONAL_PRICING[code];
+                  const isSelected = selectedRegion === code;
+                  return (
+                    <button
+                      key={code}
+                      type="button"
+                      role="radio"
+                      aria-checked={isSelected}
+                      className={`wise-region-btn ${isSelected ? 'active' : ''}`}
+                      onClick={() => handleSelectRegion(code)}
+                    >
+                      <span className="flag">{reg.flag}</span>
+                      <span>{reg.countryName}</span>
+                      <span className="curr-tag">({reg.currencySymbol} {reg.currencyCode})</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
 
             {/* Monthly / Annual Toggle */}
             <div className="wise-billing-toggle">
@@ -607,12 +793,12 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
                 </div>
               </article>
 
-              {/* Card 2: Starter / Standard Plan (90 Rs/mo or 918 Rs/yr) */}
+              {/* Card 2: Starter / Standard Plan */}
               <article className="wise-plan-card featured-card">
                 <div className="wise-card-body">
                   <span className="wise-plan-label">Starter plan</span>
                   <div className="wise-price-block">
-                    <strong className="wise-price-big">{starterPrice} Rs</strong>
+                    <strong className="wise-price-big">{starterPriceDisplay}</strong>
                     <span className="wise-price-period">{periodUnit}</span>
                   </div>
                   <p className="wise-plan-desc">
@@ -647,11 +833,11 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
                     className="wise-plan-btn"
                     onClick={() =>
                       handleSelectPlan({
-                        id: 'starter-160',
+                        id: `starter-${currentRegion.code.toLowerCase()}`,
                         title: 'Starter Plan',
-                        priceMonthly: 160,
-                        priceAnnual: 1632,
-                        displayPrice: `${starterPrice} Rs`,
+                        priceMonthly: currentRegion.starterMonthly,
+                        priceAnnual: currentRegion.starterAnnual,
+                        displayPrice: starterPriceDisplay,
                         periodLabel: annual ? 'per year' : 'per month',
                         subtitle: 'Ideal for growing communities',
                       })
@@ -687,12 +873,12 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
                 </div>
               </article>
 
-              {/* Card 3: Premium Plan (150 Rs/mo or 1530 Rs/yr) */}
+              {/* Card 3: Premium Plan */}
               <article className="wise-plan-card">
                 <div className="wise-card-body">
                   <span className="wise-plan-label">Premium plan</span>
                   <div className="wise-price-block">
-                    <strong className="wise-price-big">{premiumPrice} Rs</strong>
+                    <strong className="wise-price-big">{premiumPriceDisplay}</strong>
                     <span className="wise-price-period">{periodUnit}</span>
                   </div>
                   <p className="wise-plan-desc">
@@ -727,11 +913,11 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
                     className="wise-plan-btn"
                     onClick={() =>
                       handleSelectPlan({
-                        id: 'premium-310',
+                        id: `premium-${currentRegion.code.toLowerCase()}`,
                         title: 'Premium Plan',
-                        priceMonthly: 310,
-                        priceAnnual: 3162,
-                        displayPrice: `${premiumPrice} Rs`,
+                        priceMonthly: currentRegion.premiumMonthly,
+                        priceAnnual: currentRegion.premiumAnnual,
+                        displayPrice: premiumPriceDisplay,
                         periodLabel: annual ? 'per year' : 'per month',
                         subtitle: 'Works best for large & power servers',
                       })
@@ -790,8 +976,8 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
               <div className="wise-table-header">
                 <div className="col-feature">Feature comparison</div>
                 <div className="col-tier">Basic (Free)</div>
-                <div className="col-tier">Starter ({starterPrice} Rs)</div>
-                <div className="col-tier">Premium ({premiumPrice} Rs)</div>
+                <div className="col-tier">Starter ({starterPriceDisplay})</div>
+                <div className="col-tier">Premium ({premiumPriceDisplay})</div>
               </div>
 
               {comparisonRows.map((row, i) => (
@@ -886,17 +1072,17 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
                   className="wise-plan-btn orbital-btn"
                   onClick={() =>
                     handleSelectPlan({
-                      id: 'premium-310',
+                      id: `premium-${currentRegion.code.toLowerCase()}`,
                       title: 'Premium Plan',
-                      priceMonthly: 310,
-                      priceAnnual: 3162,
-                      displayPrice: `${premiumPrice} Rs`,
+                      priceMonthly: currentRegion.premiumMonthly,
+                      priceAnnual: currentRegion.premiumAnnual,
+                      displayPrice: premiumPriceDisplay,
                       periodLabel: annual ? 'per year' : 'per month',
                       subtitle: 'Works best for large & power servers',
                     })
                   }
                 >
-                  Get Cya Premium
+                  Get Cya Premium ({premiumPriceDisplay})
                 </button>
               </div>
             </div>
@@ -940,13 +1126,24 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
               <div className="method-tabs-grid">
                 <button
                   type="button"
+                  className={`method-tab-btn ${paymentMethod === 'UPI' ? 'active upi-active' : ''}`}
+                  onClick={() => {
+                    setPaymentMethod('UPI');
+                    setFormError('');
+                  }}
+                >
+                  <strong>⚡ UPI (India)</strong>
+                  <small>GPay / PhonePe / Paytm</small>
+                </button>
+                <button
+                  type="button"
                   className={`method-tab-btn ${paymentMethod === 'EasyPaisa' ? 'active' : ''}`}
                   onClick={() => {
                     setPaymentMethod('EasyPaisa');
                     setFormError('');
                   }}
                 >
-                  <strong>EasyPaisa</strong>
+                  <strong>💚 EasyPaisa</strong>
                   <small>EasyPaisa QR</small>
                 </button>
                 <button
@@ -957,7 +1154,7 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
                     setFormError('');
                   }}
                 >
-                  <strong>JazzCash</strong>
+                  <strong>🧡 JazzCash</strong>
                   <small>JazzCash QR</small>
                 </button>
                 <button
@@ -968,7 +1165,7 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
                     setFormError('');
                   }}
                 >
-                  <strong>Crypto (USDT)</strong>
+                  <strong>🌐 Crypto (USDT)</strong>
                   <small>Binance QR</small>
                 </button>
               </div>
@@ -1006,6 +1203,12 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
                             color: '#22d3ee',
                             borderColor: 'rgba(34, 211, 238, 0.4)',
                           }
+                        : paymentMethod === 'UPI'
+                        ? {
+                            background: 'rgba(168, 85, 247, 0.18)',
+                            color: '#d8b4fe',
+                            borderColor: 'rgba(168, 85, 247, 0.4)',
+                          }
                         : undefined
                     }
                   >
@@ -1013,28 +1216,64 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
                       ? 'EasyPaisa Merchant QR'
                       : paymentMethod === 'JazzCash'
                       ? 'JazzCash Merchant QR'
+                      : paymentMethod === 'UPI'
+                      ? 'Instant UPI QR (India)'
                       : 'USDT / Binance Pay QR'}
                   </span>
                   <span className="ep-amount-tag">Send {selectedPlan.displayPrice}</span>
                 </div>
                 <p>{currentMethodConfig.instructions}</p>
                 {currentMethodConfig.accountNumber && (
-                  <div className="ep-account-meta">
+                  <div className="ep-account-meta" style={{ alignItems: 'center' }}>
                     <span>
-                      {paymentMethod === 'Crypto' ? 'Network:' : 'Title:'}{' '}
+                      {paymentMethod === 'Crypto'
+                        ? 'Network:'
+                        : paymentMethod === 'UPI'
+                        ? 'Receiver Name:'
+                        : 'Title:'}{' '}
                       <strong>{currentMethodConfig.accountTitle}</strong>
                     </span>
                     <span>•</span>
                     <span>
-                      {paymentMethod === 'Crypto' ? 'ID/Address:' : 'No:'}{' '}
-                      <strong>{currentMethodConfig.accountNumber}</strong>
+                      {paymentMethod === 'Crypto'
+                        ? 'ID/Address:'
+                        : paymentMethod === 'UPI'
+                        ? 'UPI ID (VPA):'
+                        : 'No:'}{' '}
+                      <strong style={{ color: paymentMethod === 'UPI' ? '#c084fc' : '#ffffff' }}>
+                        {currentMethodConfig.accountNumber}
+                      </strong>
                     </span>
+                    {paymentMethod === 'UPI' && (
+                      <button
+                        type="button"
+                        className="copy-upi-btn"
+                        onClick={() => {
+                          navigator.clipboard.writeText(currentMethodConfig.accountNumber);
+                          setUpiCopied(true);
+                          setTimeout(() => setUpiCopied(false), 2000);
+                        }}
+                      >
+                        {upiCopied ? '✓ Copied' : '📋 Copy UPI ID'}
+                      </button>
+                    )}
+                  </div>
+                )}
+                {paymentMethod === 'UPI' && (
+                  <div className="upi-apps-row">
+                    <span>Accepted:</span>
+                    <span className="app-tag">Google Pay</span>
+                    <span className="app-tag">PhonePe</span>
+                    <span className="app-tag">Paytm</span>
+                    <span className="app-tag">BHIM</span>
+                    <span className="app-tag">CRED</span>
+                    <span className="app-tag">Any UPI App</span>
                   </div>
                 )}
               </div>
             </div>
 
-            {/* Form asking for user's real number */}
+            {/* Form asking for user's real number or UPI ID */}
             <form onSubmit={handleClickDone} className="easypaisa-form">
               <div className="form-field">
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -1043,6 +1282,8 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
                       ? 'Your Registered EasyPaisa Number *'
                       : paymentMethod === 'JazzCash'
                       ? 'Your Registered JazzCash Number *'
+                      : paymentMethod === 'UPI'
+                      ? 'Your UPI ID (VPA) or Indian Mobile Number *'
                       : 'Your Sender Wallet / Binance UID or Phone *'}
                   </label>
                   {phoneNumber.trim().length > 0 && (
@@ -1061,9 +1302,11 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
                 </div>
                 <input
                   id="ep-phone"
-                  type="tel"
+                  type="text"
                   placeholder={
-                    paymentMethod === 'Crypto'
+                    paymentMethod === 'UPI'
+                      ? 'e.g. username@okhdfcbank or 9876543210@paytm'
+                      : paymentMethod === 'Crypto'
                       ? 'e.g. 849201928 or T... Wallet or 0312-3456789'
                       : '0312-3456789 (11-digit valid PK number)'
                   }
@@ -1081,6 +1324,28 @@ export const BillingPage: React.FC<BillingPageProps> = ({ onNavigate }) => {
                         }
                       : undefined
                   }
+                  required
+                />
+              </div>
+
+              <div className="form-field">
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
+                  <label htmlFor="ep-email" style={{ margin: 0 }}>
+                    Email Address (For Instant Receipt &amp; Status from cyabot@zohomail.com) *
+                  </label>
+                  <span style={{ fontSize: '11px', color: '#22d3ee', fontWeight: 600 }}>
+                    ✉️ Auto Mail on Purchase
+                  </span>
+                </div>
+                <input
+                  id="ep-email"
+                  type="email"
+                  placeholder="e.g. yourname@gmail.com or business email"
+                  value={buyerEmail}
+                  onChange={(e) => {
+                    setBuyerEmail(e.target.value);
+                    if (formError) setFormError('');
+                  }}
                   required
                 />
               </div>

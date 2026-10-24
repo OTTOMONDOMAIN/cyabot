@@ -1,0 +1,3006 @@
+{
+  "1552270485520384112": {
+    "guildId": "1552270485520384112",
+    "guildName": "Cya Official Hub",
+    "memberCount": 150,
+    "iconUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=256",
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T03:02:07.942Z",
+    "botPresent": true
+  },
+  "977811094775160894": {
+    "guildId": "977811094775160894",
+    "guildName": "1805",
+    "memberCount": 1320,
+    "iconUrl": "https://cdn.discordapp.com/icons/977811094775160894/a_79a15084ecb192db9c7b83c6835926c8.png?size=256",
+    "botPresent": true,
+    "authorizedUserIds": [
+      "1364577822844387432"
+    ],
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T03:12:20.076Z",
+    "ownerUserId": "1364577822844387432"
+  },
+  "1364981788358738063": {
+    "guildId": "1364981788358738063",
+    "guildName": "Aura X Storm",
+    "memberCount": 53,
+    "iconUrl": "https://cdn.discordapp.com/icons/1364981788358738063/cea2445a03dc8d926eaab949976d276b.png?size=256",
+    "botPresent": false,
+    "authorizedUserIds": [
+      "1364577822844387432"
+    ],
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T03:12:20.076Z",
+    "ownerUserId": "1364577822844387432"
+  },
+  "1371886480556818482": {
+    "guildId": "1371886480556818482",
+    "guildName": "` Λ S P I R E",
+    "memberCount": 8,
+    "iconUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=256",
+    "botPresent": false,
+    "authorizedUserIds": [
+      "1364577822844387432"
+    ],
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T03:12:20.076Z",
+    "ownerUserId": "1364577822844387432"
+  },
+  "1388598079300829255": {
+    "guildId": "1388598079300829255",
+    "guildName": "BBBBBBBBBBBBBB",
+    "memberCount": 17,
+    "iconUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=256",
+    "botPresent": false,
+    "authorizedUserIds": [
+      "1364577822844387432"
+    ],
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T03:12:20.076Z",
+    "ownerUserId": "1364577822844387432"
+  },
+  "1396910028992286831": {
+    "guildId": "1396910028992286831",
+    "guildName": ".....",
+    "memberCount": 29,
+    "iconUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=256",
+    "botPresent": false,
+    "authorizedUserIds": [
+      "1364577822844387432"
+    ],
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T03:12:20.076Z",
+    "ownerUserId": "1364577822844387432"
+  },
+  "1403672580728164382": {
+    "guildId": "1403672580728164382",
+    "guildName": "STRIKE MC || PLAY.STRIKEMC.FUN",
+    "memberCount": 27,
+    "iconUrl": "https://cdn.discordapp.com/icons/1403672580728164382/f8c0174afa64d1694fd556c0ee713dd1.png?size=256",
+    "botPresent": false,
+    "authorizedUserIds": [
+      "1364577822844387432"
+    ],
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T03:12:20.076Z",
+    "ownerUserId": "1364577822844387432"
+  },
+  "1407991120973271041": {
+    "guildId": "1407991120973271041",
+    "guildName": "cya official",
+    "memberCount": 55,
+    "iconUrl": "https://cdn.discordapp.com/icons/1407991120973271041/2b0a2ab45746361bb77e9779c1383b9e.png?size=256",
+    "botPresent": true,
+    "authorizedUserIds": [
+      "1364577822844387432"
+    ],
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T03:12:20.076Z",
+    "ownerUserId": "1364577822844387432"
+  },
+  "1414647293734551554": {
+    "guildId": "1414647293734551554",
+    "guildName": "MINECLIFF | #1 ASIA NETWORK",
+    "memberCount": 121,
+    "iconUrl": "https://cdn.discordapp.com/icons/1414647293734551554/567815ff7b000edeb03ee850f2ede4be.png?size=256",
+    "botPresent": true,
+    "authorizedUserIds": [
+      "1364577822844387432"
+    ],
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T03:12:20.076Z",
+    "ownerUserId": "1364577822844387432"
+  },
+  "1416038747341979753": {
+    "guildId": "1416038747341979753",
+    "guildName": "/Enlight",
+    "memberCount": 39,
+    "iconUrl": "https://cdn.discordapp.com/icons/1416038747341979753/ee545bd5da7b595a9628e2b1fe5b7bda.png?size=256",
+    "botPresent": false,
+    "authorizedUserIds": [
+      "1364577822844387432"
+    ],
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T03:12:20.076Z",
+    "ownerUserId": "1364577822844387432"
+  },
+  "1421834821847744582": {
+    "guildId": "1421834821847744582",
+    "guildName": "FEATHER MC || RELEASED",
+    "memberCount": 79,
+    "iconUrl": "https://cdn.discordapp.com/icons/1421834821847744582/ec34001e3b252fc0b4cf700c4009afae.png?size=256",
+    "botPresent": false,
+    "authorizedUserIds": [
+      "1364577822844387432"
+    ],
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T03:12:20.076Z",
+    "ownerUserId": "1364577822844387432"
+  },
+  "1435573340499742752": {
+    "guildId": "1435573340499742752",
+    "guildName": "Test bot",
+    "memberCount": 47,
+    "iconUrl": "https://cdn.discordapp.com/icons/1435573340499742752/47e5a6a213ec5717704124509cff1f17.png?size=256",
+    "botPresent": false,
+    "authorizedUserIds": [
+      "1364577822844387432"
+    ],
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T03:12:20.076Z",
+    "ownerUserId": "1364577822844387432"
+  },
+  "1436635832458018890": {
+    "guildId": "1436635832458018890",
+    "guildName": "hope.ephixe's server",
+    "memberCount": 9,
+    "iconUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=256",
+    "botPresent": false,
+    "authorizedUserIds": [
+      "1364577822844387432"
+    ],
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T03:12:20.076Z",
+    "ownerUserId": "1364577822844387432"
+  },
+  "1447207120922480732": {
+    "guildId": "1447207120922480732",
+    "guildName": "Wave Labs Development",
+    "memberCount": 8,
+    "iconUrl": "https://cdn.discordapp.com/icons/1447207120922480732/4f3d7f378a127beb6052f53b87462318.png?size=256",
+    "botPresent": false,
+    "authorizedUserIds": [
+      "1364577822844387432"
+    ],
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T03:12:20.076Z",
+    "ownerUserId": "1364577822844387432"
+  },
+  "1447981421955252441": {
+    "guildId": "1447981421955252441",
+    "guildName": "InDark SMP| Minecraft | Season 1",
+    "memberCount": 47,
+    "iconUrl": "https://cdn.discordapp.com/icons/1447981421955252441/5ca9561c80d73bc251138904cf16762f.png?size=256",
+    "botPresent": false,
+    "authorizedUserIds": [
+      "1364577822844387432"
+    ],
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T03:12:20.076Z",
+    "ownerUserId": "1364577822844387432"
+  },
+  "1451241349662638176": {
+    "guildId": "1451241349662638176",
+    "guildName": "DairyMilk | Chill﹒Emoji﹒Pfps﹒Social﹒Games﹒Dating﹒Hangout﹒Friends﹒Gws﹒Events",
+    "memberCount": 87,
+    "iconUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=256",
+    "botPresent": false,
+    "authorizedUserIds": [
+      "1364577822844387432"
+    ],
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T03:12:20.076Z",
+    "ownerUserId": "1364577822844387432"
+  },
+  "1451611167792562300": {
+    "guildId": "1451611167792562300",
+    "guildName": "Arise MC • S3 | #Lifesteal + crazy items",
+    "memberCount": 44,
+    "iconUrl": "https://cdn.discordapp.com/icons/1451611167792562300/ec6385939f0b627729dc550f1b5822ec.png?size=256",
+    "botPresent": false,
+    "authorizedUserIds": [
+      "1364577822844387432"
+    ],
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T03:12:20.076Z",
+    "ownerUserId": "1364577822844387432"
+  },
+  "1451621453995704466": {
+    "guildId": "1451621453995704466",
+    "guildName": "UMER gaming",
+    "memberCount": 24,
+    "iconUrl": "https://cdn.discordapp.com/icons/1451621453995704466/214af43fc097ed7ed4101609bdb70e06.png?size=256",
+    "botPresent": false,
+    "authorizedUserIds": [
+      "1364577822844387432"
+    ],
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T03:12:20.076Z",
+    "ownerUserId": "1364577822844387432"
+  },
+  "1454135081013612629": {
+    "guildId": "1454135081013612629",
+    "guildName": "cya  - DEVELOPMENT",
+    "memberCount": 38,
+    "iconUrl": "https://cdn.discordapp.com/icons/1454135081013612629/ae8cd7cec9b7370d503545752993f4f4.png?size=256",
+    "botPresent": true,
+    "authorizedUserIds": [
+      "1364577822844387432"
+    ],
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T03:12:20.076Z",
+    "ownerUserId": "1364577822844387432"
+  },
+  "1454872233066369088": {
+    "guildId": "1454872233066369088",
+    "guildName": "Team 𝗔RES | Headquarter",
+    "memberCount": 17,
+    "iconUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=256",
+    "botPresent": false,
+    "authorizedUserIds": [
+      "1364577822844387432"
+    ],
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T03:12:20.076Z",
+    "ownerUserId": "1364577822844387432"
+  },
+  "1459900615328006296": {
+    "guildId": "1459900615328006296",
+    "guildName": "ExE ' Coder'S",
+    "memberCount": 26,
+    "iconUrl": "https://cdn.discordapp.com/icons/1459900615328006296/4ef079f9b0d0a459c7d67d8059c18d4e.png?size=256",
+    "botPresent": false,
+    "authorizedUserIds": [
+      "1364577822844387432"
+    ],
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T03:12:20.076Z",
+    "ownerUserId": "1364577822844387432"
+  },
+  "1462513818218397903": {
+    "guildId": "1462513818218397903",
+    "guildName": "the lounge",
+    "memberCount": 27,
+    "iconUrl": "https://cdn.discordapp.com/icons/1462513818218397903/a1b1f3fc4d525c85a7534820c4e472e4.png?size=256",
+    "botPresent": false,
+    "authorizedUserIds": [
+      "1364577822844387432"
+    ],
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T03:12:20.076Z",
+    "ownerUserId": "1364577822844387432"
+  },
+  "1463201963314511896": {
+    "guildId": "1463201963314511896",
+    "guildName": "🏙 | Midnight Plaza",
+    "memberCount": 218,
+    "iconUrl": "https://cdn.discordapp.com/icons/1463201963314511896/6c70a9304506a836bf447c1c35923e2c.png?size=256",
+    "botPresent": false,
+    "authorizedUserIds": [
+      "1364577822844387432"
+    ],
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T03:12:20.076Z",
+    "ownerUserId": "1364577822844387432"
+  },
+  "1463912922580516917": {
+    "guildId": "1463912922580516917",
+    "guildName": "nezwashere #2026",
+    "memberCount": 14,
+    "iconUrl": "https://cdn.discordapp.com/icons/1463912922580516917/15db66eaa65de5c302780f99033f758d.png?size=256",
+    "botPresent": false,
+    "authorizedUserIds": [
+      "1364577822844387432"
+    ],
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T03:12:20.076Z",
+    "ownerUserId": "1364577822844387432"
+  },
+  "1463949662552592515": {
+    "guildId": "1463949662552592515",
+    "guildName": "Dark X Night",
+    "memberCount": 31,
+    "iconUrl": "https://cdn.discordapp.com/icons/1463949662552592515/3c52cc9324a8965d1ad1338321e9f850.png?size=256",
+    "botPresent": false,
+    "authorizedUserIds": [
+      "1364577822844387432"
+    ],
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T03:12:20.076Z",
+    "ownerUserId": "1364577822844387432"
+  },
+  "1466117874207948894": {
+    "guildId": "1466117874207948894",
+    "guildName": "/reaper gwy owo emojis",
+    "memberCount": 13,
+    "iconUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=256",
+    "botPresent": false,
+    "authorizedUserIds": [
+      "1364577822844387432"
+    ],
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T03:12:20.076Z",
+    "ownerUserId": "1364577822844387432"
+  },
+  "1466496770296119525": {
+    "guildId": "1466496770296119525",
+    "guildName": "Dosti • Social | • Chilling • vc",
+    "memberCount": 5,
+    "iconUrl": "https://cdn.discordapp.com/icons/1466496770296119525/af724257639423698afd82e9032a8b41.png?size=256",
+    "botPresent": false,
+    "authorizedUserIds": [
+      "1364577822844387432"
+    ],
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T03:12:20.076Z",
+    "ownerUserId": "1364577822844387432"
+  },
+  "1469677880374989014": {
+    "guildId": "1469677880374989014",
+    "guildName": "Creed",
+    "memberCount": 14,
+    "iconUrl": "https://cdn.discordapp.com/icons/1469677880374989014/62fe8d11f7dc204bcecfef3836c0fc5a.png?size=256",
+    "botPresent": false,
+    "authorizedUserIds": [
+      "1364577822844387432"
+    ],
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T03:12:20.076Z",
+    "ownerUserId": "1364577822844387432"
+  },
+  "1483975797126594684": {
+    "guildId": "1483975797126594684",
+    "guildName": "OG Cloud",
+    "memberCount": 29,
+    "iconUrl": "https://cdn.discordapp.com/icons/1483975797126594684/6088fa5e94ea429a7c52149c9acb8d2b.png?size=256",
+    "botPresent": false,
+    "authorizedUserIds": [
+      "1364577822844387432"
+    ],
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T03:12:20.076Z",
+    "ownerUserId": "1364577822844387432"
+  },
+  "1490778500724953201": {
+    "guildId": "1490778500724953201",
+    "guildName": "Dark Cloud | shop",
+    "memberCount": 14,
+    "iconUrl": "https://cdn.discordapp.com/icons/1490778500724953201/30d4b6dfd9ae55b7ec8f42f7ab1215a7.png?size=256",
+    "botPresent": false,
+    "authorizedUserIds": [
+      "1364577822844387432"
+    ],
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T03:12:20.076Z",
+    "ownerUserId": "1364577822844387432"
+  },
+  "1495865575795331082": {
+    "guildId": "1495865575795331082",
+    "guildName": "Test",
+    "memberCount": 3,
+    "iconUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=256",
+    "botPresent": false,
+    "authorizedUserIds": [
+      "1364577822844387432"
+    ],
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T03:12:20.076Z",
+    "ownerUserId": "1364577822844387432"
+  },
+  "1496938444029562932": {
+    "guildId": "1496938444029562932",
+    "guildName": "⚫ Titans Of King ⚫",
+    "memberCount": 14,
+    "iconUrl": "https://cdn.discordapp.com/icons/1496938444029562932/c866a14078a3722ce0b72b7e51cb39d4.png?size=256",
+    "botPresent": false,
+    "authorizedUserIds": [
+      "1364577822844387432"
+    ],
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T03:12:20.076Z",
+    "ownerUserId": "1364577822844387432"
+  },
+  "1508096258185887884": {
+    "guildId": "1508096258185887884",
+    "guildName": "INTCommunity",
+    "memberCount": 292,
+    "iconUrl": "https://cdn.discordapp.com/icons/1508096258185887884/fbc92bf0571cc863e51ee0d2bd8cfeda.png?size=256",
+    "botPresent": true,
+    "authorizedUserIds": [
+      "1364577822844387432"
+    ],
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T03:12:20.076Z",
+    "ownerUserId": "1364577822844387432"
+  },
+  "1514180668261925006": {
+    "guildId": "1514180668261925006",
+    "guildName": "Developer's Cafe",
+    "memberCount": 7,
+    "iconUrl": "https://cdn.discordapp.com/icons/1514180668261925006/29c619fa4e77a90115884487c7bc7d41.png?size=256",
+    "botPresent": false,
+    "authorizedUserIds": [
+      "1364577822844387432"
+    ],
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T03:12:20.076Z",
+    "ownerUserId": "1364577822844387432"
+  },
+  "1515743305789476905": {
+    "guildId": "1515743305789476905",
+    "guildName": "Storm Craze | # Asia Network | New Era",
+    "memberCount": 27,
+    "iconUrl": "https://cdn.discordapp.com/icons/1515743305789476905/fc3d079605aed97c946a3466903b156e.png?size=256",
+    "botPresent": false,
+    "authorizedUserIds": [
+      "1364577822844387432"
+    ],
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T03:12:20.076Z",
+    "ownerUserId": "1364577822844387432"
+  },
+  "1520443099472462075": {
+    "guildId": "1520443099472462075",
+    "guildName": "/Enlight | Chill Community • Shop",
+    "memberCount": 22,
+    "iconUrl": "https://cdn.discordapp.com/icons/1520443099472462075/2107c33573fa90abae99066fdde92304.png?size=256",
+    "botPresent": false,
+    "authorizedUserIds": [
+      "1364577822844387432"
+    ],
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T03:12:20.076Z",
+    "ownerUserId": "1364577822844387432"
+  },
+  "1521454601482666064": {
+    "guildId": "1521454601482666064",
+    "guildName": "IYI",
+    "memberCount": 4,
+    "iconUrl": "https://cdn.discordapp.com/icons/1521454601482666064/a58b8bcf40dc4f2855b3fd986cae7f50.png?size=256",
+    "botPresent": false,
+    "authorizedUserIds": [
+      "1364577822844387432"
+    ],
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T03:12:20.076Z",
+    "ownerUserId": "1364577822844387432"
+  },
+  "1537497127838679100": {
+    "guildId": "1537497127838679100",
+    "guildName": "@ . /Tonight",
+    "memberCount": 47,
+    "iconUrl": "https://cdn.discordapp.com/icons/1537497127838679100/bbe47573eb4bfabf6d99b406f193ea29.png?size=256",
+    "botPresent": false,
+    "authorizedUserIds": [
+      "1364577822844387432"
+    ],
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T03:12:20.077Z",
+    "ownerUserId": "1364577822844387432"
+  },
+  "1543308503777673419": {
+    "guildId": "1543308503777673419",
+    "guildName": "H. OG SYNDICATE",
+    "memberCount": 26,
+    "iconUrl": "https://cdn.discordapp.com/icons/1543308503777673419/dba5718c4733b17901fd9e0aff96607d.png?size=256",
+    "botPresent": false,
+    "authorizedUserIds": [
+      "1364577822844387432"
+    ],
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T03:12:20.077Z",
+    "ownerUserId": "1364577822844387432"
+  },
+  "1546836103028285530": {
+    "guildId": "1546836103028285530",
+    "guildName": "@teann / we luv",
+    "memberCount": 19,
+    "iconUrl": "https://cdn.discordapp.com/icons/1546836103028285530/cdc76757c6807c12c9478aac604cb147.png?size=256",
+    "botPresent": false,
+    "authorizedUserIds": [
+      "1364577822844387432"
+    ],
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T03:12:20.077Z",
+    "ownerUserId": "1364577822844387432"
+  },
+  "1550774241409114172": {
+    "guildId": "1550774241409114172",
+    "guildName": "cya emotes",
+    "memberCount": 5,
+    "iconUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=256",
+    "botPresent": true,
+    "authorizedUserIds": [
+      "1364577822844387432"
+    ],
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T03:12:20.077Z",
+    "ownerUserId": "1364577822844387432"
+  },
+  "1554512887240990804": {
+    "guildId": "1554512887240990804",
+    "guildName": "Cubix Studio",
+    "memberCount": 21,
+    "iconUrl": "https://cdn.discordapp.com/icons/1554512887240990804/561116c61036f7da236c7694a72b141c.png?size=256",
+    "botPresent": false,
+    "authorizedUserIds": [
+      "1364577822844387432"
+    ],
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T03:12:20.077Z",
+    "ownerUserId": "1364577822844387432"
+  },
+  "1557453327183253655": {
+    "guildId": "1557453327183253655",
+    "guildName": "Umer {left}'s server",
+    "memberCount": 9,
+    "iconUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=256",
+    "botPresent": false,
+    "authorizedUserIds": [
+      "1364577822844387432"
+    ],
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T03:12:20.077Z",
+    "ownerUserId": "1364577822844387432"
+  },
+  "1558768185615065100": {
+    "guildId": "1558768185615065100",
+    "guildName": "k.a.o clan",
+    "memberCount": 19,
+    "iconUrl": "https://cdn.discordapp.com/icons/1558768185615065100/f0f037c319a2527493ad2c7da31912f0.png?size=256",
+    "botPresent": false,
+    "authorizedUserIds": [
+      "1364577822844387432"
+    ],
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T03:12:20.077Z",
+    "ownerUserId": "1364577822844387432"
+  },
+  "1555223654193827850": {
+    "guildId": "1555223654193827850",
+    "guildName": "Vanguard Community",
+    "memberCount": 640,
+    "iconUrl": "https://cdn.discordapp.com/embed/avatars/4.png",
+    "botPresent": true,
+    "authorizedUserIds": [
+      "1364577822844387432"
+    ],
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T10:53:00.092Z",
+    "ownerUserId": "1364577822844387432"
+  },
+  "1520119107725430954": {
+    "guildId": "1520119107725430954",
+    "guildName": "Cursing | Chill • Hangout • Gaming • Dating",
+    "memberCount": 940,
+    "iconUrl": "https://images-ext-1.discordapp.net/external/itKmJwnTqKjQIHHqL3kt7c0sXMazUVO88ILm5Jlj_z0/%3Fsize%3D1024/https/cdn.discordapp.com/icons/1520119107725430954/a_32fcda5ab0e4fa736040dbb71993dba4.gif?width=384&height=384https://cdn.discordapp.com/embed/avatars/1.png",
+    "botPresent": true,
+    "authorizedUserIds": [
+      "1364577822844387432"
+    ],
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T13:19:05.853Z",
+    "ownerUserId": "1364577822844387432"
+  },
+  "1549667633987723326": {
+    "guildId": "1549667633987723326",
+    "guildName": "Cya Partner Network",
+    "memberCount": 1850,
+    "iconUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=256",
+    "botPresent": true,
+    "authorizedUserIds": [
+      "1364577822844387432"
+    ],
+    "planTier": "premium",
+    "prefix": "!",
+    "noPrefixMode": true,
+    "noPrefixUsers": [],
+    "earlyAccessCommands": true,
+    "aiCommandsEnabled": true,
+    "antinuke": {
+      "enabled": true,
+      "punishment": "ban",
+      "antiChannelDelete": true,
+      "antiRoleDelete": true,
+      "antiMassBan": true,
+      "antiWebhook": true,
+      "antiBotAdd": true,
+      "whitelistedUsers": []
+    },
+    "automod": {
+      "antiLinks": false,
+      "antiInvites": true,
+      "antiPhishing": true,
+      "antiSpam": true,
+      "logChannel": "#mod-logs"
+    },
+    "music": {
+      "mode247": true,
+      "defaultVolume": 100,
+      "audioFilter": "none",
+      "djRole": "@DJ"
+    },
+    "voicemaster": {
+      "enabled": true,
+      "categoryName": "🔊 Temporary Voice",
+      "hubChannelName": "➕ Join to Create",
+      "defaultBitrate": 96
+    },
+    "customProfile": {
+      "nickname": "Cya",
+      "avatarUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=1024",
+      "bannerUrl": "",
+      "bio": "Protected & powered by Cya (cya.lat)"
+    },
+    "savedEmbeds": [
+      {
+        "id": "emb-welcome",
+        "name": "Welcome Banner",
+        "channelName": "#welcome",
+        "title": "Welcome to the Server!",
+        "description": "Read the rules and enjoy 24/7 music & VoiceMaster channels powered by Cya.",
+        "color": "#22d3ee",
+        "footer": "cya.lat · Official Server Bot"
+      }
+    ],
+    "updatedAt": "2026-10-12T13:23:13.749Z",
+    "ownerUserId": "1364577822844387432"
+  }
+}

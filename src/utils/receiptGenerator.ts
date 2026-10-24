@@ -7,12 +7,14 @@ export interface ReceiptData {
   phoneNumber: string;
   discordTag?: string;
   trxId?: string;
+  email?: string;
+  denialReason?: string;
   status: 'pending' | 'verified' | 'rejected';
   createdAt: string;
 }
 
 export function validatePaymentInput(
-  method: 'EasyPaisa' | 'JazzCash' | 'Crypto',
+  method: 'EasyPaisa' | 'JazzCash' | 'Crypto' | 'UPI',
   rawInput: string
 ): { valid: boolean; formatted: string; carrier?: string; error?: string } {
   const raw = String(rawInput || '').trim();
@@ -69,6 +71,48 @@ export function validatePaymentInput(
 
   if (method === 'EasyPaisa' || method === 'JazzCash') {
     return checkPakPhone(digitsOnly);
+  }
+
+  if (method === 'UPI') {
+    // Check if valid UPI VPA (e.g. name@upi, user@okhdfcbank, 9876543210@paytm)
+    if (/^[\w.\-_]{2,64}@[a-zA-Z0-9]{2,32}$/i.test(raw)) {
+      return {
+        valid: true,
+        formatted: raw.toLowerCase(),
+        carrier: 'UPI Virtual Payment Address (VPA)',
+      };
+    }
+
+    // Check Indian mobile number (10 digits starting with 6-9, optional +91 or 0 prefix)
+    let inDigits = digitsOnly;
+    if (inDigits.startsWith('+91')) inDigits = inDigits.slice(3);
+    else if (inDigits.startsWith('91') && inDigits.length === 12) inDigits = inDigits.slice(2);
+    else if (inDigits.startsWith('0') && inDigits.length === 11) inDigits = inDigits.slice(1);
+
+    if (/^[6-9]\d{9}$/.test(inDigits)) {
+      if (!/^(\d)\1{9}$/.test(inDigits) && inDigits !== '1234567890') {
+        return {
+          valid: true,
+          formatted: `+91 ${inDigits.slice(0, 5)} ${inDigits.slice(5)}`,
+          carrier: 'Indian Mobile (UPI Linked)',
+        };
+      }
+    }
+
+    // Also accept 12-digit UTR/TID
+    if (/^\d{12}$/.test(raw)) {
+      return {
+        valid: true,
+        formatted: raw,
+        carrier: 'UPI UTR / Bank Reference',
+      };
+    }
+
+    return {
+      valid: false,
+      formatted: raw,
+      error: 'Enter a valid UPI ID (e.g. username@upi, 9876543210@paytm) or a 10-digit Indian mobile number.',
+    };
   }
 
   // Crypto: TRC20, EVM, Binance UID, or PK Phone
@@ -179,9 +223,14 @@ export function downloadReceiptImage(receipt: ReceiptData) {
     ['Billing Frequency', receipt.billingCycle.toUpperCase()],
     ['Payment Gateway', receipt.paymentMethod],
     ['Sender Account / Mobile', receipt.phoneNumber],
+    ['Customer Email', receipt.email || 'cyabot@zohomail.com'],
     ['Discord User / Server ID', receipt.discordTag || 'Not Provided'],
     ['Gateway TID / Reference', receipt.trxId || 'Standard QR Payment'],
   ];
+
+  if (receipt.denialReason && receipt.status === 'rejected') {
+    rows.push(['Denial Reason', receipt.denialReason]);
+  }
 
   let y = 430;
   rows.forEach(([label, val]) => {

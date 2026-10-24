@@ -74,15 +74,15 @@ export const ActivityMonitor: React.FC<ActivityMonitorProps> = ({
   const getTypeBadge = (type: ActivityEvent['type']) => {
     switch (type) {
       case 'command':
-        return { label: '⚡ COMMAND', color: '#22d3ee', bg: 'rgba(6, 182, 212, 0.14)' };
+        return { label: '⚡ Command', color: '#22d3ee', bg: 'rgba(6, 182, 212, 0.14)' };
       case 'security':
-        return { label: '🛡️ ANTINUKE', color: '#34d399', bg: 'rgba(16, 185, 129, 0.14)' };
+        return { label: '🛡️ Antinuke', color: '#34d399', bg: 'rgba(16, 185, 129, 0.14)' };
       case 'gateway':
-        return { label: '🛰️ GATEWAY', color: '#38bdf8', bg: 'rgba(56, 189, 248, 0.14)' };
+        return { label: '🛰️ Gateway', color: '#22d3ee', bg: 'rgba(56, 189, 248, 0.14)' };
       case 'billing':
-        return { label: '💳 BILLING', color: '#fbbf24', bg: 'rgba(245, 158, 11, 0.15)' };
+        return { label: '💳 Billing', color: '#22d3ee', bg: 'rgba(6, 182, 212, 0.15)' };
       default:
-        return { label: '🔄 BOT SYNC', color: '#a78bfa', bg: 'rgba(167, 139, 250, 0.15)' };
+        return { label: '🔄 Bot Sync', color: '#34d399', bg: 'rgba(16, 185, 129, 0.15)' };
     }
   };
 
@@ -93,9 +93,9 @@ export const ActivityMonitor: React.FC<ActivityMonitorProps> = ({
         <div className="am-title-group">
           <div className="am-live-beacon">
             <span className="am-pulse-dot"></span>
-            <span>LIVE ACTIVITY MONITOR</span>
+            <span>Live Activity Monitor</span>
           </div>
-          <h3>Real-Time Gateway &amp; Bot Telemetry</h3>
+          <h2>Real-Time Gateway &amp; Bot Telemetry</h2>
         </div>
 
         <div className="am-actions">

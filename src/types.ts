@@ -74,3 +74,16 @@ export interface Command {
   arguments?: CommandArgument[];
   cooldown?: number;
 }
+
+export interface FeaturedServerItem {
+  id: string;
+  name: string;
+  memberCount: number;
+  onlineCount?: number;
+  iconUrl: string;
+  widgetEnabled: boolean;
+  inviteUrl?: string;
+  verified?: boolean;
+  badgeColor?: 'green' | 'blue' | 'cyan';
+}
+

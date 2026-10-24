@@ -38,6 +38,24 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, variant = 'default' 
           color: '#8b8e96',
         }}
       >
+        <a
+          href="/dashboard"
+          onClick={(e) => {
+            e.preventDefault();
+            sessionStorage.removeItem('cya_oauth_auto_triggered');
+            const savedUser = sessionStorage.getItem('cya_dashboard_user');
+            if (!savedUser) {
+              const redirectUri = encodeURIComponent(`${window.location.origin}/auth/callback`);
+              const oauthUrl = `https://discord.com/oauth2/authorize?client_id=1552270485520384112&response_type=token&redirect_uri=${redirectUri}&scope=identify%20guilds&prompt=consent`;
+              window.open(oauthUrl, 'discord_oauth', 'width=520,height=680');
+            }
+            onNavigate('/dashboard');
+          }}
+          className="hover:text-white transition-colors"
+          style={{ color: '#818cf8', fontWeight: 600 }}
+        >
+          Dashboard
+        </a>
         <a href="/tos" onClick={(e) => handleLinkClick(e, '/tos')} className="hover:text-white transition-colors">
           Terms
         </a>

@@ -1,0 +1,62 @@
+[
+  {
+    "id": "1508096258185887884",
+    "name": "INTCommunity",
+    "memberCount": 292,
+    "onlineCount": 36,
+    "iconUrl": "https://cdn.discordapp.com/icons/1508096258185887884/fbc92bf0571cc863e51ee0d2bd8cfeda.png?size=256",
+    "widgetEnabled": true,
+    "verified": true,
+    "badgeColor": "green"
+  },
+  {
+    "id": "977811094775160894",
+    "name": "1805",
+    "memberCount": 1320,
+    "onlineCount": 14,
+    "iconUrl": "https://cdn.discordapp.com/icons/977811094775160894/a_79a15084ecb192db9c7b83c6835926c8.png?size=256",
+    "widgetEnabled": true,
+    "verified": true,
+    "badgeColor": "green"
+  },
+  {
+    "id": "1414647293734551554",
+    "name": "MINECLIFF | #1 ASIA NETWORK",
+    "memberCount": 121,
+    "onlineCount": 20,
+    "iconUrl": "https://cdn.discordapp.com/icons/1414647293734551554/567815ff7b000edeb03ee850f2ede4be.png?size=256",
+    "widgetEnabled": true,
+    "verified": true,
+    "badgeColor": "green"
+  },
+  {
+    "id": "1549667633987723326",
+    "name": "Cya Partner Network",
+    "memberCount": 1850,
+    "onlineCount": 142,
+    "iconUrl": "https://cdn.discordapp.com/avatars/1552270485520384112/8e9ac6083bb92a8e4691af95e8f737b7.png?size=256",
+    "widgetEnabled": true,
+    "verified": true,
+    "badgeColor": "blue"
+  },
+  {
+    "id": "1520119107725430954",
+    "name": "Apex Gaming Lounge",
+    "memberCount": 940,
+    "onlineCount": 84,
+    "iconUrl": "https://cdn.discordapp.com/embed/avatars/1.png",
+    "widgetEnabled": true,
+    "verified": true,
+    "badgeColor": "green"
+  },
+  {
+    "id": "1555223654193827850",
+    "name": "Vanguard Community",
+    "memberCount": 640,
+    "onlineCount": 58,
+    "iconUrl": "https://cdn.discordapp.com/embed/avatars/4.png",
+    "widgetEnabled": true,
+    "verified": true,
+    "badgeColor": "blue"
+  }
+]
