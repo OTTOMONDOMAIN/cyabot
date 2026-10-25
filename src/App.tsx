@@ -17,10 +17,22 @@ import { DashboardPage } from './pages/DashboardPage';
 export default function App() {
   const getInitialRoute = () => {
     if (typeof window !== 'undefined') {
+      const search = new URLSearchParams(window.location.search);
+      if (search.get('page') === 'admin' || search.get('admin') === 'true' || search.get('admin') === '1') {
+        return '/admin';
+      }
+      if (search.get('page') === 'dashboard') {
+        return '/dashboard';
+      }
+
       const hash = window.location.hash.replace(/^#\/?/, '').toLowerCase();
-      if (hash === 'admin') return '/admin';
-      if (hash === 'dashboard') return '/dashboard';
-      const p = window.location.pathname.toLowerCase();
+      if (hash === 'admin' || hash === '/admin') return '/admin';
+      if (hash === 'dashboard' || hash === '/dashboard') return '/dashboard';
+
+      const p = window.location.pathname.toLowerCase().replace(/\/+$/, '');
+      if (p === '/admin' || p === '/admin.html') return '/admin';
+      if (p === '/dashboard' || p === '/dashboard.html') return '/dashboard';
+
       return p === '' ? '/' : p;
     }
     return '/';
@@ -30,16 +42,36 @@ export default function App() {
 
   useEffect(() => {
     const handleLocationChange = () => {
-      const hash = window.location.hash.replace(/^#\/?/, '').toLowerCase();
-      if (hash === 'admin') {
+      const search = new URLSearchParams(window.location.search);
+      if (search.get('page') === 'admin' || search.get('admin') === 'true' || search.get('admin') === '1') {
         setCurrentPath('/admin');
         return;
       }
-      if (hash === 'dashboard') {
+      if (search.get('page') === 'dashboard') {
         setCurrentPath('/dashboard');
         return;
       }
-      const p = window.location.pathname.toLowerCase();
+
+      const hash = window.location.hash.replace(/^#\/?/, '').toLowerCase();
+      if (hash === 'admin' || hash === '/admin') {
+        setCurrentPath('/admin');
+        return;
+      }
+      if (hash === 'dashboard' || hash === '/dashboard') {
+        setCurrentPath('/dashboard');
+        return;
+      }
+
+      const p = window.location.pathname.toLowerCase().replace(/\/+$/, '');
+      if (p === '/admin' || p === '/admin.html') {
+        setCurrentPath('/admin');
+        return;
+      }
+      if (p === '/dashboard' || p === '/dashboard.html') {
+        setCurrentPath('/dashboard');
+        return;
+      }
+
       setCurrentPath(p === '' ? '/' : p);
     };
 

@@ -12,6 +12,18 @@ import {
   getSmtpConfig,
   sendMailInternal,
 } from './src/server/mailService';
+import {
+  saveTransactionToSupabase,
+  updateTransactionStatusInSupabase,
+  fetchTransactionsFromSupabase,
+  saveEmailLogToSupabase,
+  saveBotStatsToSupabase,
+  syncLocalDataToSupabase,
+  getSupabaseStatus,
+  testSupabaseConnection,
+  updateSupabaseConfigInEnv,
+  isSupabaseConfigured,
+} from './src/server/supabaseService';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -747,6 +759,14 @@ app.post('/api/transactions', (req: Request, res: Response) => {
 
   transactions.unshift(newTx);
   writeTransactions(transactions);
+
+  // Persist to Supabase in background if configured
+  if (isSupabaseConfigured()) {
+    saveTransactionToSupabase(newTx).catch((err) => {
+      console.error('[Supabase] Failed to persist transaction:', err);
+    });
+  }
+
   pushActivity('billing', `New ${newTx.paymentMethod} Payment Submitted`, `${newTx.planName} (${newTx.amount}) · Ref ${newTx.id}`, 12, 0);
 
   // Send automated purchase receipt email from cyabot@zohomail.com
@@ -887,6 +907,9 @@ const handleBotSync = async (req: Request, res: Response) => {
       updatedAt: new Date().toISOString(),
     };
     fs.writeFileSync(statusFilePath, JSON.stringify(updated, null, 2), 'utf-8');
+    if (isSupabaseConfigured()) {
+      saveBotStatsToSupabase(updated).catch(() => {});
+    }
     latencyHistory.push({ timestamp: new Date().toISOString(), ms: pingMs });
     if (latencyHistory.length > 24) latencyHistory.shift();
     pushActivity(
@@ -923,12 +946,23 @@ app.post('/api/bot/activity', (req: Request, res: Response) => {
 });
 
 // Admin: Get All Transactions
-app.get('/api/admin/transactions', (req: Request, res: Response) => {
+app.get('/api/admin/transactions', async (req: Request, res: Response) => {
   if (!verifyAdminAuth(req)) {
     res.status(401).json({ error: 'Unauthorized' });
     return;
   }
-  res.json({ transactions: readTransactions() });
+  if (isSupabaseConfigured()) {
+    try {
+      const supaTx = await fetchTransactionsFromSupabase();
+      if (supaTx && supaTx.length > 0) {
+        res.json({ transactions: supaTx, source: 'supabase' });
+        return;
+      }
+    } catch (err) {
+      console.warn('[Supabase] Falling back to local transactions:', err);
+    }
+  }
+  res.json({ transactions: readTransactions(), source: 'local' });
 });
 
 // Admin: Update Transaction Status (Verify / Reject / Pending)
@@ -957,6 +991,13 @@ app.patch('/api/admin/transactions/:id', (req: Request, res: Response) => {
   }
 
   writeTransactions(transactions);
+
+  // Sync status to Supabase in background if configured
+  if (isSupabaseConfigured()) {
+    updateTransactionStatusInSupabase(req.params.id, status, transactions[idx].denialReason).catch((err) => {
+      console.error('[Supabase] Failed to update transaction status in Supabase:', err);
+    });
+  }
 
   // Trigger automated email from cyabot@zohomail.com
   if (status === 'verified' && prevStatus !== 'verified') {
@@ -1175,6 +1216,83 @@ app.post('/api/admin/mail-config', (req: Request, res: Response) => {
     res.json({ success: true, message: 'SMTP settings saved to .env & active!' });
   } catch (err: any) {
     res.status(500).json({ error: 'Failed to update SMTP settings: ' + err.message });
+  }
+});
+
+// Admin: Supabase Connection Status
+app.get('/api/admin/supabase/status', async (req: Request, res: Response) => {
+  if (!verifyAdminAuth(req)) {
+    res.status(401).json({ error: 'Unauthorized' });
+    return;
+  }
+  try {
+    const status = await getSupabaseStatus();
+    res.json(status);
+  } catch (err: any) {
+    res.status(500).json({ error: 'Failed to get Supabase status: ' + err.message });
+  }
+});
+
+// Admin: Supabase Connection Test
+app.post('/api/admin/supabase/test', async (req: Request, res: Response) => {
+  if (!verifyAdminAuth(req)) {
+    res.status(401).json({ error: 'Unauthorized' });
+    return;
+  }
+  try {
+    const result = await testSupabaseConnection();
+    res.json(result);
+  } catch (err: any) {
+    res.status(500).json({ success: false, message: 'Test failed: ' + err.message });
+  }
+});
+
+// Admin: Save Supabase Config to .env file
+app.post('/api/admin/supabase/config', async (req: Request, res: Response) => {
+  if (!verifyAdminAuth(req)) {
+    res.status(401).json({ error: 'Unauthorized' });
+    return;
+  }
+  const { url, anonKey, serviceRoleKey } = req.body;
+  if (!url || (!anonKey && !serviceRoleKey)) {
+    res.status(400).json({ error: 'Project URL and at least one API key are required' });
+    return;
+  }
+
+  const updated = updateSupabaseConfigInEnv(url, anonKey || '', serviceRoleKey);
+  if (!updated) {
+    res.status(500).json({ error: 'Failed to write Supabase configuration to .env' });
+    return;
+  }
+
+  // Verify connection immediately
+  const test = await testSupabaseConnection();
+  res.json({
+    success: true,
+    message: test.message,
+    connected: test.success,
+  });
+});
+
+// Admin: Sync Local Data to Supabase (Transactions and Email Logs)
+app.post('/api/admin/supabase/sync', async (req: Request, res: Response) => {
+  if (!verifyAdminAuth(req)) {
+    res.status(401).json({ error: 'Unauthorized' });
+    return;
+  }
+
+  try {
+    const transactions = readTransactions();
+    const logs = readEmailLogs();
+    const result = await syncLocalDataToSupabase(transactions, logs);
+    res.json({
+      success: !result.error,
+      syncedTransactions: result.syncedTransactions,
+      syncedLogs: result.syncedLogs,
+      error: result.error,
+    });
+  } catch (err: any) {
+    res.status(500).json({ success: false, error: 'Sync failed: ' + err.message });
   }
 });
 
@@ -2263,4 +2381,10 @@ async function startServer() {
   });
 }
 
-startServer();
+if (process.env.VERCEL !== '1' && process.env.NODE_ENV !== 'test') {
+  startServer();
+}
+
+export default app;
+export { app };
+

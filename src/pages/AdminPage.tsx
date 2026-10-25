@@ -4,6 +4,7 @@ import type { FeaturedServerItem } from '../types';
 import fallbackFeatured from '../data/featured_servers.json';
 import { MailSettingsPanel } from '../components/MailSettingsPanel';
 import { DenialModal } from '../components/DenialModal';
+import { SupabasePanel } from '../components/SupabasePanel';
 
 interface MethodPaymentConfig {
   qrCodeUrl: string;
@@ -63,7 +64,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
   const [filterStatus, setFilterStatus] = useState<'all' | 'pending' | 'verified' | 'rejected'>('all');
   const [filterMethod, setFilterMethod] = useState<'all' | 'EasyPaisa' | 'JazzCash' | 'Crypto'>('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [activeSection, setActiveSection] = useState<'transactions' | 'qr-settings' | 'bot-stats' | 'featured-servers' | 'mail-snippets'>('transactions');
+  const [activeSection, setActiveSection] = useState<'transactions' | 'qr-settings' | 'bot-stats' | 'featured-servers' | 'mail-snippets' | 'supabase'>('transactions');
   const [copiedText, setCopiedText] = useState<string | null>(null);
   const [selectedTxModal, setSelectedTxModal] = useState<ReceiptData | null>(null);
 
@@ -905,7 +906,9 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                 </div>
               </div>
               <h1>
-                {activeSection === 'bot-stats'
+                {activeSection === 'supabase'
+                  ? 'Supabase Cloud Database & Data Sync'
+                  : activeSection === 'bot-stats'
                   ? 'Live Bot Guilds & Stats'
                   : activeSection === 'featured-servers'
                   ? 'Featured Communities & Widgets'
@@ -927,6 +930,15 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
               <span>📋 Transactions</span>
               {pendingCount > 0 && <span className="pending-count-bubble">{pendingCount}</span>}
             </button>
+
+            <button
+              type="button"
+              className={`admin-tab-switch ${activeSection === 'supabase' ? 'active' : ''}`}
+              onClick={() => setActiveSection('supabase')}
+            >
+              <span>⚡ Supabase DB</span>
+            </button>
+
             <button
               type="button"
               className={`admin-tab-switch ${activeSection === 'qr-settings' ? 'active' : ''}`}
@@ -1629,6 +1641,14 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
               </div>
             </form>
           </section>
+        ) : activeSection === 'supabase' ? (
+          <SupabasePanel
+            token={token}
+            onShowToast={(msg, type) => {
+              setMailActionToast(msg);
+              setTimeout(() => setMailActionToast(''), 4500);
+            }}
+          />
         ) : activeSection === 'mail-snippets' ? (
           <MailSettingsPanel
             token={token}

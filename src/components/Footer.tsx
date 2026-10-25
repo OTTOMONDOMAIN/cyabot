@@ -88,6 +88,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, variant = 'default' 
           Support
         </a>
         <a
+          href="/admin"
+          onClick={(e) => handleLinkClick(e, '/admin')}
+          className="hover:text-white transition-colors"
+          style={{ color: '#10b981', fontWeight: 600 }}
+        >
+          Admin Portal
+        </a>
+        <a
           href="mailto:cyabot@zohomail.com"
           className="hover:text-white transition-colors"
           style={{ color: '#22d3ee', fontWeight: 600 }}
